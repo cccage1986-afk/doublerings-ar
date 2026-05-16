@@ -114,17 +114,9 @@
             background: transparent;
         }
 
-        /* Плавный переход ковра по бокам */
+        /* Плавный переход ковра по бокам - УБРАН по запросу */
         .furniture-overlay::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -500vw;
-            right: -500vw;
-            height: 55%;
-            background: linear-gradient(to top, #f0e6d8 0%, rgba(240, 230, 216, 0.6) 70%, transparent 100%);
-            z-index: -1;
-            pointer-events: none;
+            display: none;
         }
 
         .furniture-overlay img {
