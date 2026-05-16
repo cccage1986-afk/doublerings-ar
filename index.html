@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -8,15 +8,15 @@
     
     <!-- SEO -->
     <meta property="og:title" content="Визуализатор — DOUBLE RINGS">
-    <meta property="og:description" content="Примерьте бамбуковые панели, гибкий камень и другие материалы в своем интерьере">
+    <meta property="og:description" content="РџСЂРёРјРµСЂСЊС‚Рµ Р±Р°РјР±СѓРєРѕРІС‹Рµ РїР°РЅРµР»Рё, РіРёР±РєРёР№ РєР°РјРµРЅСЊ Рё РґСЂСѓРіРёРµ РјР°С‚РµСЂРёР°Р»С‹ РІ СЃРІРѕРµРј РёРЅС‚РµСЂСЊРµСЂРµ">
     <meta property="og:type" content="website">
     
-    <!-- Preconnect для ускорения загрузки -->
+    <!-- Preconnect РґР»СЏ СѓСЃРєРѕСЂРµРЅРёСЏ Р·Р°РіСЂСѓР·РєРё -->
     <link rel="preconnect" href="https://static.tildacdn.com">
     <link rel="preconnect" href="https://images.unsplash.com">
     
     <style>
-        /* ======== СБРОС И БАЗА ======== */
+        /* ======== РЎР‘Р РћРЎ Р Р‘РђР—Рђ ======== */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -46,7 +46,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ======== КОНТЕЙНЕР ВИЗУАЛИЗАТОРА ======== */
+        /* ======== РљРћРќРўР•Р™РќР•Р  Р’РР—РЈРђР›РР—РђРўРћР Рђ ======== */
         .visualizer {
             display: flex;
             height: 100vh;
@@ -54,7 +54,7 @@
             position: relative;
         }
 
-        /* Панели */
+        /* РџР°РЅРµР»Рё */
         .panel {
             flex: 1;
             height: 100%;
@@ -87,7 +87,7 @@
             z-index: 2;
         }
 
-        /* Индикатор выбранной панели */
+        /* РРЅРґРёРєР°С‚РѕСЂ РІС‹Р±СЂР°РЅРЅРѕР№ РїР°РЅРµР»Рё */
         .panel::before {
             content: '';
             position: absolute;
@@ -98,7 +98,7 @@
             z-index: 10;
         }
 
-        /* ======== МЕБЕЛЬ НА ПЕРЕДНЕМ ПЛАНЕ ======== */
+        /* ======== РњР•Р‘Р•Р›Р¬ РќРђ РџР•Р Р•Р”РќР•Рњ РџР›РђРќР• ======== */
         .furniture-overlay {
             position: absolute;
             bottom: 0;
@@ -110,11 +110,11 @@
             margin: 0 auto;
             z-index: 100;
             pointer-events: none;
-            /* Прозрачный фон без размытия */
+            /* РџСЂРѕР·СЂР°С‡РЅС‹Р№ С„РѕРЅ Р±РµР· СЂР°Р·РјС‹С‚РёСЏ */
             background: transparent;
         }
 
-        /* Плавный переход ковра по бокам */
+        /* РџР»Р°РІРЅС‹Р№ РїРµСЂРµС…РѕРґ РєРѕРІСЂР° РїРѕ Р±РѕРєР°Рј */
         .furniture-overlay::before {
             content: '';
             position: absolute;
@@ -141,7 +141,7 @@
             border-color: var(--dr-gold);
         }
 
-        /* ======== КНОПКА ВЫБОРА ПАНЕЛИ ======== */
+        /* ======== РљРќРћРџРљРђ Р’Р«Р‘РћР Рђ РџРђРќР•Р›Р ======== */
         .control-btn {
             position: fixed;
             bottom: 100px;
@@ -230,7 +230,7 @@
             transform: translateY(0);
         }
 
-        /* Анимация пульсации */
+        /* РђРЅРёРјР°С†РёСЏ РїСѓР»СЊСЃР°С†РёРё */
         .control-btn.pulse {
             animation: pulse 2s infinite;
         }
@@ -240,7 +240,7 @@
             50% { box-shadow: 0 0 0 15px rgba(196, 163, 90, 0); }
         }
 
-        /* ======== МЕНЮ ВЫБОРА ======== */
+        /* ======== РњР•РќР® Р’Р«Р‘РћР Рђ ======== */
         .menu-overlay {
             position: fixed;
             inset: 0;
@@ -338,7 +338,7 @@
             background: #f5f5f5;
         }
 
-        /* Категории */
+        /* РљР°С‚РµРіРѕСЂРёРё */
         .menu__types {
             padding: 15px;
             display: flex;
@@ -389,7 +389,7 @@
         }
 
         .menu__type-btn::after {
-            content: '→';
+            content: 'в†’';
             opacity: 0;
             transition: opacity 0.2s;
             font-weight: bold;
@@ -399,7 +399,7 @@
             opacity: 1;
         }
 
-        /* Сетка текстур */
+        /* РЎРµС‚РєР° С‚РµРєСЃС‚СѓСЂ */
         .menu__textures {
             display: none;
             flex-wrap: wrap;
@@ -473,7 +473,7 @@
         }
 
         .texture-btn.active::after {
-            content: '✓';
+            content: 'вњ“';
             position: absolute;
             top: 8px;
             right: 8px;
@@ -510,7 +510,7 @@
             opacity: 1;
         }
 
-        /* Состояние загрузки текстуры */
+        /* РЎРѕСЃС‚РѕСЏРЅРёРµ Р·Р°РіСЂСѓР·РєРё С‚РµРєСЃС‚СѓСЂС‹ */
         .texture-btn.error {
             background: #ffe0e0;
             display: flex;
@@ -519,7 +519,7 @@
         }
 
         .texture-btn.error::after {
-            content: '⚠️';
+            content: 'вљ пёЏ';
             font-size: 24px;
         }
 
@@ -528,14 +528,14 @@
             background: rgba(0,0,0,0.6);
         }
 
-        /* ======== ШАПКА ======== */
-        /* Удалена по запросу */
+        /* ======== РЁРђРџРљРђ ======== */
+        /* РЈРґР°Р»РµРЅР° РїРѕ Р·Р°РїСЂРѕСЃСѓ */
 
         .header {
             display: none !important;
         }
         
-        /* Скрытие виджетов Tilda и других внешних элементов */
+        /* РЎРєСЂС‹С‚РёРµ РІРёРґР¶РµС‚РѕРІ Tilda Рё РґСЂСѓРіРёС… РІРЅРµС€РЅРёС… СЌР»РµРјРµРЅС‚РѕРІ */
         body > div[id^="w-"],
         body > div[class^="w-"],
         body > div[id*="tilda"],
@@ -553,7 +553,7 @@
             z-index: -1 !important;
         }
 
-        /* Скрытие всех ссылок и элементов сверху */
+        /* РЎРєСЂС‹С‚РёРµ РІСЃРµС… СЃСЃС‹Р»РѕРє Рё СЌР»РµРјРµРЅС‚РѕРІ СЃРІРµСЂС…Сѓ */
         .header,
         header,
         .t-header,
@@ -561,10 +561,10 @@
             display: none !important;
         }
 
-        /* ======== ПОДВАЛ ======== */
-        /* Удалён по запросу */
+        /* ======== РџРћР”Р’РђР› ======== */
+        /* РЈРґР°Р»С‘РЅ РїРѕ Р·Р°РїСЂРѕСЃСѓ */
 
-        /* ======== АДАПТИВНОСТЬ ======== */
+        /* ======== РђР”РђРџРўРР’РќРћРЎРўР¬ ======== */
         @media (max-width: 1024px) {
             :root {
                 --menu-width: 350px;
@@ -644,7 +644,7 @@
             }
         }
 
-        /* ======== ПРЕЛОАДЕР ======== */
+        /* ======== РџР Р•Р›РћРђР”Р•Р  ======== */
         .preloader {
             position: fixed;
             inset: 0;
@@ -682,7 +682,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ======== УВЕДОМЛЕНИЯ ======== */
+        /* ======== РЈР’Р•Р”РћРњР›Р•РќРРЇ ======== */
         .toast {
             position: fixed;
             bottom: 100px;
@@ -723,7 +723,7 @@
             fill: currentColor;
         }
 
-        /* ======== КНОПКА СБРОСА ======== */
+        /* ======== РљРќРћРџРљРђ РЎР‘Р РћРЎРђ ======== */
         .reset-btn {
             position: fixed;
             bottom: 100px;
@@ -762,141 +762,141 @@
     </style>
 </head>
 <body>
-    <!-- Прелоадер -->
+    <!-- РџСЂРµР»РѕР°РґРµСЂ -->
     <div class="preloader" id="preloader" aria-live="polite">
         <div class="preloader__spinner"></div>
-        <div class="preloader__text">Загрузка визуализатора...</div>
+        <div class="preloader__text">Р—Р°РіСЂСѓР·РєР° РІРёР·СѓР°Р»РёР·Р°С‚РѕСЂР°...</div>
     </div>
 
-    <!-- Шапка -->
+    <!-- РЁР°РїРєР° -->
     <header class="header">
     </header>
 
-    <!-- Визуализатор -->
-    <div class="visualizer" role="region" aria-label="Визуализатор интерьеров">
-        <div class="panel panel-left" id="panelLeft" role="button" aria-label="Левая панель" tabindex="0"></div>
-        <div class="panel panel-center" id="panelCenter" role="button" aria-label="Центральная панель" tabindex="0"></div>
-        <div class="panel panel-right" id="panelRight" role="button" aria-label="Правая панель" tabindex="0"></div>
+    <!-- Р’РёР·СѓР°Р»РёР·Р°С‚РѕСЂ -->
+    <div class="visualizer" role="region" aria-label="Р’РёР·СѓР°Р»РёР·Р°С‚РѕСЂ РёРЅС‚РµСЂСЊРµСЂРѕРІ">
+        <div class="panel panel-left" id="panelLeft" role="button" aria-label="Р›РµРІР°СЏ РїР°РЅРµР»СЊ" tabindex="0"></div>
+        <div class="panel panel-center" id="panelCenter" role="button" aria-label="Р¦РµРЅС‚СЂР°Р»СЊРЅР°СЏ РїР°РЅРµР»СЊ" tabindex="0"></div>
+        <div class="panel panel-right" id="panelRight" role="button" aria-label="РџСЂР°РІР°СЏ РїР°РЅРµР»СЊ" tabindex="0"></div>
         
-        <!-- Мебель на переднем плане -->
+        <!-- РњРµР±РµР»СЊ РЅР° РїРµСЂРµРґРЅРµРј РїР»Р°РЅРµ -->
         <div class="furniture-overlay" aria-hidden="true">
-            <img src="images/sofa.png" alt="Угловой диван">
+            <img src="images/sofa.png" alt="РЈРіР»РѕРІРѕР№ РґРёРІР°РЅ">
         </div>
     </div>
 
-    <!-- Кнопка выбора панели -->
-    <button class="control-btn pulse" id="selectPanelBtn" aria-label="Выбрать панель">
+    <!-- РљРЅРѕРїРєР° РІС‹Р±РѕСЂР° РїР°РЅРµР»Рё -->
+    <button class="control-btn pulse" id="selectPanelBtn" aria-label="Р’С‹Р±СЂР°С‚СЊ РїР°РЅРµР»СЊ">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
     </button>
 
-    <!-- Кнопка сброса -->
-    <button class="reset-btn" id="resetBtn" aria-label="Сбросить все текстуры" title="Сбросить все текстуры">
+    <!-- РљРЅРѕРїРєР° СЃР±СЂРѕСЃР° -->
+    <button class="reset-btn" id="resetBtn" aria-label="РЎР±СЂРѕСЃРёС‚СЊ РІСЃРµ С‚РµРєСЃС‚СѓСЂС‹" title="РЎР±СЂРѕСЃРёС‚СЊ РІСЃРµ С‚РµРєСЃС‚СѓСЂС‹">
         <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
     </button>
 
-    <!-- Меню выбора -->
+    <!-- РњРµРЅСЋ РІС‹Р±РѕСЂР° -->
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
         <div class="menu__header">
-            <div class="menu__title" id="menuTitle">Выберите материал:</div>
-            <button class="menu__close" id="menuClose" aria-label="Закрыть меню">
+            <div class="menu__title" id="menuTitle">Р’С‹Р±РµСЂРёС‚Рµ РјР°С‚РµСЂРёР°Р»:</div>
+            <button class="menu__close" id="menuClose" aria-label="Р—Р°РєСЂС‹С‚СЊ РјРµРЅСЋ">
                 <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
             </button>
         </div>
-        <div class="menu__back" id="menuBack" role="button" tabindex="0">← К категориям</div>
+        <div class="menu__back" id="menuBack" role="button" tabindex="0">в†ђ Рљ РєР°С‚РµРіРѕСЂРёСЏРј</div>
         <div class="menu__types" id="menuTypes" role="list"></div>
         <div class="menu__textures" id="menuTextures" role="list"></div>
     </div>
 
-    <!-- Уведомления -->
+    <!-- РЈРІРµРґРѕРјР»РµРЅРёСЏ -->
     <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
     <script>
-        // ======== КОНФИГУРАЦИЯ МАТЕРИАЛОВ ========
+        // ======== РљРћРќР¤РР“РЈР РђР¦РРЇ РњРђРўР•Р РРђР›РћР’ ========
         const materialsConfig = {
-            "Бамбуковые панели": {
+            "Р‘Р°РјР±СѓРєРѕРІС‹Рµ РїР°РЅРµР»Рё": {
                 "id": "bamboo-main",
                 "categories": {
-                    "Cерия ткань": [
-                        {"name": "Художественная краска №1", "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"},
-                        {"name": "Художественная краска №2", "url": "https://static.tildacdn.com/stor6664-3264-4735-a564-333037323639/22351908.png"},
-                        {"name": "Пьянящий шёлк №1", "url": "https://static.tildacdn.com/stor3963-3933-4365-a461-636665333136/54637823.png"},
-                        {"name": "Великий шелковый путь №2", "url": "https://static.tildacdn.com/stor3331-3162-4138-a266-366132353664/87205311.png"},
-                        {"name": "Косая тень №4", "url": "https://static.tildacdn.com/stor3133-3264-4431-a561-366432373333/29386382.png"},
-                        {"name": "Льняной атлас", "url": "https://static.tildacdn.com/stor6536-6562-4064-b830-343861373738/36447810.png"},
-                        {"name": "Моранди #2", "url": "https://static.tildacdn.com/stor6336-3330-4434-b461-626666643137/83749775.png"},
-                        {"name": "Моранди #3", "url": "https://static.tildacdn.com/stor3937-3830-4066-b662-323266316234/86839348.png"},
-                        {"name": "Моранди #4", "url": "https://static.tildacdn.com/stor6436-3834-4262-b231-343036393064/68168198.png"},
-                        {"name": "Моранди #5", "url": "https://static.tildacdn.com/stor6265-3334-4763-a361-633838336261/79083154.png"},
-                        {"name": "Прага #3", "url": "https://static.tildacdn.com/stor6132-3731-4761-b337-663563346238/64509578.png"},
-                        {"name": "Звездная ткань #3", "url": "https://static.tildacdn.com/stor6333-3838-4461-a365-633065613939/52543867.png"},
-                        {"name": "Шёлковый узор #1", "url": "https://static.tildacdn.com/stor3862-6631-4131-b866-353733643865/13121723.png"}
+                    "CРµСЂРёСЏ С‚РєР°РЅСЊ": [
+                        {"name": "РҐСѓРґРѕР¶РµСЃС‚РІРµРЅРЅР°СЏ РєСЂР°СЃРєР° в„–1", "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"},
+                        {"name": "РҐСѓРґРѕР¶РµСЃС‚РІРµРЅРЅР°СЏ РєСЂР°СЃРєР° в„–2", "url": "https://static.tildacdn.com/stor6664-3264-4735-a564-333037323639/22351908.png"},
+                        {"name": "РџСЊСЏРЅСЏС‰РёР№ С€С‘Р»Рє в„–1", "url": "https://static.tildacdn.com/stor3963-3933-4365-a461-636665333136/54637823.png"},
+                        {"name": "Р’РµР»РёРєРёР№ С€РµР»РєРѕРІС‹Р№ РїСѓС‚СЊ в„–2", "url": "https://static.tildacdn.com/stor3331-3162-4138-a266-366132353664/87205311.png"},
+                        {"name": "РљРѕСЃР°СЏ С‚РµРЅСЊ в„–4", "url": "https://static.tildacdn.com/stor3133-3264-4431-a561-366432373333/29386382.png"},
+                        {"name": "Р›СЊРЅСЏРЅРѕР№ Р°С‚Р»Р°СЃ", "url": "https://static.tildacdn.com/stor6536-6562-4064-b830-343861373738/36447810.png"},
+                        {"name": "РњРѕСЂР°РЅРґРё #2", "url": "https://static.tildacdn.com/stor6336-3330-4434-b461-626666643137/83749775.png"},
+                        {"name": "РњРѕСЂР°РЅРґРё #3", "url": "https://static.tildacdn.com/stor3937-3830-4066-b662-323266316234/86839348.png"},
+                        {"name": "РњРѕСЂР°РЅРґРё #4", "url": "https://static.tildacdn.com/stor6436-3834-4262-b231-343036393064/68168198.png"},
+                        {"name": "РњРѕСЂР°РЅРґРё #5", "url": "https://static.tildacdn.com/stor6265-3334-4763-a361-633838336261/79083154.png"},
+                        {"name": "РџСЂР°РіР° #3", "url": "https://static.tildacdn.com/stor6132-3731-4761-b337-663563346238/64509578.png"},
+                        {"name": "Р—РІРµР·РґРЅР°СЏ С‚РєР°РЅСЊ #3", "url": "https://static.tildacdn.com/stor6333-3838-4461-a365-633065613939/52543867.png"},
+                        {"name": "РЁС‘Р»РєРѕРІС‹Р№ СѓР·РѕСЂ #1", "url": "https://static.tildacdn.com/stor3862-6631-4131-b866-353733643865/13121723.png"}
                     ],
-                    "Cерия дерево": [
-                        {"name": "Шведский дуб №2", "url": "https://static.tildacdn.com/stor3330-3639-4338-b832-323330653061/79958077.png"},
-                        {"name": "Североамериканский клён №2", "url": "https://static.tildacdn.com/stor3062-3966-4631-a165-333061373061/41562368.png"},
-                        {"name": "Североамериканский клён №3", "url": "https://static.tildacdn.com/stor3731-3337-4562-a439-633866646332/59287598.png"},
-                        {"name": "Серебристый шелк №5", "url": "https://static.tildacdn.com/stor3435-3434-4333-a266-333932333737/68500598.png"},
-                        {"name": "Обработанное дерево №4", "url": "https://static.tildacdn.com/stor3866-3565-4732-b964-653166303034/97440476.png"},
-                        {"name": "Светлый дуб №3", "url": "https://static.tildacdn.com/stor3633-3966-4631-b161-633766353333/52719915.png"},
-                        {"name": "Светлый дуб №5", "url": "https://static.tildacdn.com/stor3737-3331-4430-b137-653930306439/40356406.png"},
-                        {"name": "Светлый дуб №6", "url": "https://static.tildacdn.com/stor3539-3536-4561-b062-346338643933/88976939.png"},
-                        {"name": "Орешник №1", "url": "https://static.tildacdn.com/stor6235-3466-4166-b437-623535306133/36432447.png"},
-                        {"name": "Орешник №4", "url": "https://static.tildacdn.com/stor6636-6530-4663-b561-666132643261/51085779.png"},
-                        {"name": "Золотой шелк №1", "url": "https://static.tildacdn.com/stor3933-3037-4361-a562-353963663463/49870186.png"},
-                        {"name": "Золотой шелк №2", "url": "https://static.tildacdn.com/stor6339-3930-4333-b433-393734333436/32211985.png"},
-                        {"name": "Золотой шелк №3", "url": "https://static.tildacdn.com/stor6263-3537-4331-b134-396462326435/32780444.png"},
-                        {"name": "Груша №7", "url": "https://static.tildacdn.com/stor3336-6533-4665-a437-613432643538/55370785.png"}
+                    "CРµСЂРёСЏ РґРµСЂРµРІРѕ": [
+                        {"name": "РЁРІРµРґСЃРєРёР№ РґСѓР± в„–2", "url": "https://static.tildacdn.com/stor3330-3639-4338-b832-323330653061/79958077.png"},
+                        {"name": "РЎРµРІРµСЂРѕР°РјРµСЂРёРєР°РЅСЃРєРёР№ РєР»С‘РЅ в„–2", "url": "https://static.tildacdn.com/stor3062-3966-4631-a165-333061373061/41562368.png"},
+                        {"name": "РЎРµРІРµСЂРѕР°РјРµСЂРёРєР°РЅСЃРєРёР№ РєР»С‘РЅ в„–3", "url": "https://static.tildacdn.com/stor3731-3337-4562-a439-633866646332/59287598.png"},
+                        {"name": "РЎРµСЂРµР±СЂРёСЃС‚С‹Р№ С€РµР»Рє в„–5", "url": "https://static.tildacdn.com/stor3435-3434-4333-a266-333932333737/68500598.png"},
+                        {"name": "РћР±СЂР°Р±РѕС‚Р°РЅРЅРѕРµ РґРµСЂРµРІРѕ в„–4", "url": "https://static.tildacdn.com/stor3866-3565-4732-b964-653166303034/97440476.png"},
+                        {"name": "РЎРІРµС‚Р»С‹Р№ РґСѓР± в„–3", "url": "https://static.tildacdn.com/stor3633-3966-4631-b161-633766353333/52719915.png"},
+                        {"name": "РЎРІРµС‚Р»С‹Р№ РґСѓР± в„–5", "url": "https://static.tildacdn.com/stor3737-3331-4430-b137-653930306439/40356406.png"},
+                        {"name": "РЎРІРµС‚Р»С‹Р№ РґСѓР± в„–6", "url": "https://static.tildacdn.com/stor3539-3536-4561-b062-346338643933/88976939.png"},
+                        {"name": "РћСЂРµС€РЅРёРє в„–1", "url": "https://static.tildacdn.com/stor6235-3466-4166-b437-623535306133/36432447.png"},
+                        {"name": "РћСЂРµС€РЅРёРє в„–4", "url": "https://static.tildacdn.com/stor6636-6530-4663-b561-666132643261/51085779.png"},
+                        {"name": "Р—РѕР»РѕС‚РѕР№ С€РµР»Рє в„–1", "url": "https://static.tildacdn.com/stor3933-3037-4361-a562-353963663463/49870186.png"},
+                        {"name": "Р—РѕР»РѕС‚РѕР№ С€РµР»Рє в„–2", "url": "https://static.tildacdn.com/stor6339-3930-4333-b433-393734333436/32211985.png"},
+                        {"name": "Р—РѕР»РѕС‚РѕР№ С€РµР»Рє в„–3", "url": "https://static.tildacdn.com/stor6263-3537-4331-b134-396462326435/32780444.png"},
+                        {"name": "Р“СЂСѓС€Р° в„–7", "url": "https://static.tildacdn.com/stor3336-6533-4665-a437-613432643538/55370785.png"}
                     ],
-                    "Cерия метал": [
-                        {"name": "Сатин #1", "url": "https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png"},
-                        {"name": "Сатин #2", "url": "https://static.tildacdn.com/stor6537-6561-4235-a266-306338626665/88205363.png"},
-                        {"name": "Сатин #3", "url": "https://static.tildacdn.com/stor6438-6461-4534-b732-653239366164/32799585.png"},
-                        {"name": "Сатин #4", "url": "https://static.tildacdn.com/stor3961-6635-4231-b332-393565623734/84455552.png"},
-                        {"name": "Сатин #5", "url": "https://static.tildacdn.com/stor3735-3631-4462-b861-386535653266/25295316.png"},
-                        {"name": "Сатин #6", "url": "https://static.tildacdn.com/stor6264-6630-4666-a636-386631303362/88620752.png"},
-                        {"name": "Romano рельефная #1", "url": "https://static.tildacdn.com/stor3633-3539-4337-a535-316539653630/89429647.png"},
-                        {"name": "Romano рельефная #2", "url": "https://static.tildacdn.com/stor6666-6237-4265-a334-613933666331/36074273.png"},
-                        {"name": "Romano рельефная #3", "url": "https://static.tildacdn.com/stor6339-3137-4236-b436-373939633333/38373652.png"},
-                        {"name": "Cатин металлическая #1", "url": "https://static.tildacdn.com/stor6134-6137-4761-b633-336634636330/72443336.png"},
-                        {"name": "Cатин металлическая #2", "url": "https://static.tildacdn.com/stor3164-6232-4533-b736-353262303238/22885446.png"},
-                        {"name": "Cатин металлическая #3", "url": "https://static.tildacdn.com/stor6466-3461-4534-b366-656666313963/89419454.png"},
-                        {"name": "Cатин металлическая #4", "url": "https://static.tildacdn.com/stor6131-6636-4662-b462-356238343234/83442606.png"},
-                        {"name": "Металлик песочным текстурированием #1", "url": "https://static.tildacdn.com/stor6562-3166-4361-b138-653665633762/18987106.png"}
+                    "CРµСЂРёСЏ РјРµС‚Р°Р»": [
+                        {"name": "РЎР°С‚РёРЅ #1", "url": "https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png"},
+                        {"name": "РЎР°С‚РёРЅ #2", "url": "https://static.tildacdn.com/stor6537-6561-4235-a266-306338626665/88205363.png"},
+                        {"name": "РЎР°С‚РёРЅ #3", "url": "https://static.tildacdn.com/stor6438-6461-4534-b732-653239366164/32799585.png"},
+                        {"name": "РЎР°С‚РёРЅ #4", "url": "https://static.tildacdn.com/stor3961-6635-4231-b332-393565623734/84455552.png"},
+                        {"name": "РЎР°С‚РёРЅ #5", "url": "https://static.tildacdn.com/stor3735-3631-4462-b861-386535653266/25295316.png"},
+                        {"name": "РЎР°С‚РёРЅ #6", "url": "https://static.tildacdn.com/stor6264-6630-4666-a636-386631303362/88620752.png"},
+                        {"name": "Romano СЂРµР»СЊРµС„РЅР°СЏ #1", "url": "https://static.tildacdn.com/stor3633-3539-4337-a535-316539653630/89429647.png"},
+                        {"name": "Romano СЂРµР»СЊРµС„РЅР°СЏ #2", "url": "https://static.tildacdn.com/stor6666-6237-4265-a334-613933666331/36074273.png"},
+                        {"name": "Romano СЂРµР»СЊРµС„РЅР°СЏ #3", "url": "https://static.tildacdn.com/stor6339-3137-4236-b436-373939633333/38373652.png"},
+                        {"name": "CР°С‚РёРЅ РјРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ #1", "url": "https://static.tildacdn.com/stor6134-6137-4761-b633-336634636330/72443336.png"},
+                        {"name": "CР°С‚РёРЅ РјРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ #2", "url": "https://static.tildacdn.com/stor3164-6232-4533-b736-353262303238/22885446.png"},
+                        {"name": "CР°С‚РёРЅ РјРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ #3", "url": "https://static.tildacdn.com/stor6466-3461-4534-b366-656666313963/89419454.png"},
+                        {"name": "CР°С‚РёРЅ РјРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ #4", "url": "https://static.tildacdn.com/stor6131-6636-4662-b462-356238343234/83442606.png"},
+                        {"name": "РњРµС‚Р°Р»Р»РёРє РїРµСЃРѕС‡РЅС‹Рј С‚РµРєСЃС‚СѓСЂРёСЂРѕРІР°РЅРёРµРј #1", "url": "https://static.tildacdn.com/stor6562-3166-4361-b138-653665633762/18987106.png"}
                     ],
-                    "Cерия мрамор": [
-                        {"name": "Афина", "url": "https://static.tildacdn.com/stor3831-3130-4739-b565-343935323961/24835080.png"},
-                        {"name": "Романтика", "url": "https://static.tildacdn.com/stor3461-3433-4065-a335-353935396632/54407170.png"},
-                        {"name": "Черный оникс (обсидиан)", "url": "https://static.tildacdn.com/stor3933-3464-4137-b539-643033323539/55485807.png"},
-                        {"name": "Камень 8870", "url": "https://static.tildacdn.com/stor3033-6537-4362-b139-653230336164/84980544.png"},
-                        {"name": "Римское чёрное золото - 2", "url": "https://static.tildacdn.com/stor6661-3864-4466-a533-333365623862/85437427.png"},
-                        {"name": "Ракушечник", "url": "https://static.tildacdn.com/stor3361-3735-4231-a134-633664623365/42805634.png"},
-                        {"name": "Светло-серый пепел", "url": "https://static.tildacdn.com/stor6231-3838-4130-b136-646636353537/63407141.png"},
-                        {"name": "Римское чёрное золото - 1", "url": "https://static.tildacdn.com/stor3437-3832-4865-b830-306263646566/48671803.png"},
+                    "CРµСЂРёСЏ РјСЂР°РјРѕСЂ": [
+                        {"name": "РђС„РёРЅР°", "url": "https://static.tildacdn.com/stor3831-3130-4739-b565-343935323961/24835080.png"},
+                        {"name": "Р РѕРјР°РЅС‚РёРєР°", "url": "https://static.tildacdn.com/stor3461-3433-4065-a335-353935396632/54407170.png"},
+                        {"name": "Р§РµСЂРЅС‹Р№ РѕРЅРёРєСЃ (РѕР±СЃРёРґРёР°РЅ)", "url": "https://static.tildacdn.com/stor3933-3464-4137-b539-643033323539/55485807.png"},
+                        {"name": "РљР°РјРµРЅСЊ 8870", "url": "https://static.tildacdn.com/stor3033-6537-4362-b139-653230336164/84980544.png"},
+                        {"name": "Р РёРјСЃРєРѕРµ С‡С‘СЂРЅРѕРµ Р·РѕР»РѕС‚Рѕ - 2", "url": "https://static.tildacdn.com/stor6661-3864-4466-a533-333365623862/85437427.png"},
+                        {"name": "Р Р°РєСѓС€РµС‡РЅРёРє", "url": "https://static.tildacdn.com/stor3361-3735-4231-a134-633664623365/42805634.png"},
+                        {"name": "РЎРІРµС‚Р»Рѕ-СЃРµСЂС‹Р№ РїРµРїРµР»", "url": "https://static.tildacdn.com/stor6231-3838-4130-b136-646636353537/63407141.png"},
+                        {"name": "Р РёРјСЃРєРѕРµ С‡С‘СЂРЅРѕРµ Р·РѕР»РѕС‚Рѕ - 1", "url": "https://static.tildacdn.com/stor3437-3832-4865-b830-306263646566/48671803.png"},
                         {"name": "BVLGARI", "url": "https://static.tildacdn.com/stor3463-3339-4438-b038-326333356262/21745484.png"},
                         {"name": "PETG - 07", "url": "https://static.tildacdn.com/stor3661-3866-4666-b038-326166313535/95136733.png"},
-                        {"name": "Амазонка зелёная - В", "url": "https://static.tildacdn.com/stor3964-3630-4738-a337-653235303362/35591553.png"},
-                        {"name": "Белый мрамор", "url": "https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png"},
-                        {"name": "Призрачный камень", "url": "https://static.tildacdn.com/stor3638-3865-4334-a233-363737386161/54561198.png"},
+                        {"name": "РђРјР°Р·РѕРЅРєР° Р·РµР»С‘РЅР°СЏ - Р’", "url": "https://static.tildacdn.com/stor3964-3630-4738-a337-653235303362/35591553.png"},
+                        {"name": "Р‘РµР»С‹Р№ РјСЂР°РјРѕСЂ", "url": "https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png"},
+                        {"name": "РџСЂРёР·СЂР°С‡РЅС‹Р№ РєР°РјРµРЅСЊ", "url": "https://static.tildacdn.com/stor3638-3865-4334-a233-363737386161/54561198.png"},
                         {"name": "Loren Gold", "url": "https://static.tildacdn.com/stor3233-6364-4534-b865-343239616531/51579659.png"}
                     ],
-                    "Cерия блеск кристала": [
-                        {"name": "Белый ледник", "url": "https://static.tildacdn.com/stor3431-3561-4639-a131-306433363237/54595933.png"},
-                        {"name": "Диатомовый бежевый", "url": "https://static.tildacdn.com/stor3234-3031-4265-b461-393239653639/99667841.png"},
-                        {"name": "Кофе с молоком", "url": "https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png"},
-                        {"name": "Диатомовый серый", "url": "https://static.tildacdn.com/stor3738-6433-4231-b337-626433346335/12546232.png"},
-                        {"name": "Ледниково-белая ткань", "url": "https://static.tildacdn.com/stor6266-6530-4531-b838-663834393738/77225880.png"},
-                        {"name": "Ткань кофе с молоком", "url": "https://static.tildacdn.com/stor6236-6332-4964-b438-363365343335/79468631.png"},
-                        {"name": "Бежево-серая ткань", "url": "https://static.tildacdn.com/stor6634-3864-4132-b264-303734306465/29913639.png"},
-                        {"name": "Светло синяя ткань", "url": "https://static.tildacdn.com/stor3931-6539-4731-a564-353038393232/20754902.png"},
-                        {"name": "Призрачно серая ткань", "url": "https://static.tildacdn.com/stor6137-3964-4535-a238-363630613630/99919787.png"},
-                        {"name": "Эффект Мия №1", "url": "https://static.tildacdn.com/stor3966-6530-4566-b762-633230333466/95554688.png"},
-                        {"name": "Эффект Мия №2", "url": "https://static.tildacdn.com/stor3266-6264-4566-b563-323434326238/17985523.png"},
-                        {"name": "Роскошный лён №1", "url": "https://static.tildacdn.com/stor3331-3833-4965-a338-303662396665/82645621.png"},
-                        {"name": "Роскошный лён №2", "url": "https://static.tildacdn.com/stor6637-3235-4035-a539-646232653036/66398349.png"},
-                        {"name": "Роскошный лён №3", "url": "https://static.tildacdn.com/stor3936-3038-4634-a262-376230636330/19367036.png"}
+                    "CРµСЂРёСЏ Р±Р»РµСЃРє РєСЂРёСЃС‚Р°Р»Р°": [
+                        {"name": "Р‘РµР»С‹Р№ Р»РµРґРЅРёРє", "url": "https://static.tildacdn.com/stor3431-3561-4639-a131-306433363237/54595933.png"},
+                        {"name": "Р”РёР°С‚РѕРјРѕРІС‹Р№ Р±РµР¶РµРІС‹Р№", "url": "https://static.tildacdn.com/stor3234-3031-4265-b461-393239653639/99667841.png"},
+                        {"name": "РљРѕС„Рµ СЃ РјРѕР»РѕРєРѕРј", "url": "https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png"},
+                        {"name": "Р”РёР°С‚РѕРјРѕРІС‹Р№ СЃРµСЂС‹Р№", "url": "https://static.tildacdn.com/stor3738-6433-4231-b337-626433346335/12546232.png"},
+                        {"name": "Р›РµРґРЅРёРєРѕРІРѕ-Р±РµР»Р°СЏ С‚РєР°РЅСЊ", "url": "https://static.tildacdn.com/stor6266-6530-4531-b838-663834393738/77225880.png"},
+                        {"name": "РўРєР°РЅСЊ РєРѕС„Рµ СЃ РјРѕР»РѕРєРѕРј", "url": "https://static.tildacdn.com/stor6236-6332-4964-b438-363365343335/79468631.png"},
+                        {"name": "Р‘РµР¶РµРІРѕ-СЃРµСЂР°СЏ С‚РєР°РЅСЊ", "url": "https://static.tildacdn.com/stor6634-3864-4132-b264-303734306465/29913639.png"},
+                        {"name": "РЎРІРµС‚Р»Рѕ СЃРёРЅСЏСЏ С‚РєР°РЅСЊ", "url": "https://static.tildacdn.com/stor3931-6539-4731-a564-353038393232/20754902.png"},
+                        {"name": "РџСЂРёР·СЂР°С‡РЅРѕ СЃРµСЂР°СЏ С‚РєР°РЅСЊ", "url": "https://static.tildacdn.com/stor6137-3964-4535-a238-363630613630/99919787.png"},
+                        {"name": "Р­С„С„РµРєС‚ РњРёСЏ в„–1", "url": "https://static.tildacdn.com/stor3966-6530-4566-b762-633230333466/95554688.png"},
+                        {"name": "Р­С„С„РµРєС‚ РњРёСЏ в„–2", "url": "https://static.tildacdn.com/stor3266-6264-4566-b563-323434326238/17985523.png"},
+                        {"name": "Р РѕСЃРєРѕС€РЅС‹Р№ Р»С‘РЅ в„–1", "url": "https://static.tildacdn.com/stor3331-3833-4965-a338-303662396665/82645621.png"},
+                        {"name": "Р РѕСЃРєРѕС€РЅС‹Р№ Р»С‘РЅ в„–2", "url": "https://static.tildacdn.com/stor6637-3235-4035-a539-646232653036/66398349.png"},
+                        {"name": "Р РѕСЃРєРѕС€РЅС‹Р№ Р»С‘РЅ в„–3", "url": "https://static.tildacdn.com/stor3936-3038-4634-a262-376230636330/19367036.png"}
                     ],
-                    "Cерия кожа": [
+                    "CРµСЂРёСЏ РєРѕР¶Р°": [
                         {"name": "8f046", "url": "https://static.tildacdn.com/stor3638-6365-4264-b731-333039303363/23762658.png"},
                         {"name": "8f006", "url": "https://static.tildacdn.com/stor3765-3635-4536-b038-346165363064/18726157.png"},
                         {"name": "8f008", "url": "https://static.tildacdn.com/stor6265-3637-4266-b430-336636333732/16514021.png"},
@@ -916,7 +916,7 @@
             }
         };
 
-        // ======== СОСТОЯНИЕ ПРИЛОЖЕНИЯ ========
+        // ======== РЎРћРЎРўРћРЇРќРР• РџР РР›РћР–Р•РќРРЇ ========
         const state = {
             currentPanel: null,
             selectedPanel: null,
@@ -929,7 +929,7 @@
             isLoading: true
         };
 
-        // ======== ЭЛЕМЕНТЫ DOM ========
+        // ======== Р­Р›Р•РњР•РќРўР« DOM ========
         const elements = {
             menu: document.getElementById('menu'),
             menuOverlay: document.getElementById('menuOverlay'),
@@ -948,10 +948,10 @@
             resetBtn: document.getElementById('resetBtn')
         };
 
-        // ======== УТИЛИТЫ ========
+        // ======== РЈРўРР›РРўР« ========
         
         /**
-         * Нормализация URL для надежного сравнения
+         * РќРѕСЂРјР°Р»РёР·Р°С†РёСЏ URL РґР»СЏ РЅР°РґРµР¶РЅРѕРіРѕ СЃСЂР°РІРЅРµРЅРёСЏ
          */
         function normalizeUrl(url) {
             if (!url) return '';
@@ -962,7 +962,7 @@
         }
 
         /**
-         * Проверка валидности URL
+         * РџСЂРѕРІРµСЂРєР° РІР°Р»РёРґРЅРѕСЃС‚Рё URL
          */
         function isValidUrl(url) {
             try {
@@ -974,7 +974,7 @@
         }
 
         /**
-         * Показ уведомления
+         * РџРѕРєР°Р· СѓРІРµРґРѕРјР»РµРЅРёСЏ
          */
         function showToast(message, type = 'info', duration = 3000) {
             const toast = elements.toast;
@@ -993,7 +993,7 @@
         }
 
         /**
-         * Сохранение состояния в localStorage
+         * РЎРѕС…СЂР°РЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІ localStorage
          */
         function saveState() {
             try {
@@ -1003,19 +1003,19 @@
                 };
                 localStorage.setItem('dr-visualizer-state', JSON.stringify(dataToSave));
             } catch (e) {
-                console.warn('Не удалось сохранить состояние:', e);
+                console.warn('РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕС…СЂР°РЅРёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ:', e);
             }
         }
 
         /**
-         * Загрузка состояния из localStorage
+         * Р—Р°РіСЂСѓР·РєР° СЃРѕСЃС‚РѕСЏРЅРёСЏ РёР· localStorage
          */
         function loadState() {
             try {
                 const saved = localStorage.getItem('dr-visualizer-state');
                 if (saved) {
                     const data = JSON.parse(saved);
-                    // Проверяем актуальность (не старше 7 дней)
+                    // РџСЂРѕРІРµСЂСЏРµРј Р°РєС‚СѓР°Р»СЊРЅРѕСЃС‚СЊ (РЅРµ СЃС‚Р°СЂС€Рµ 7 РґРЅРµР№)
                     const isExpired = Date.now() - data.timestamp > 7 * 24 * 60 * 60 * 1000;
                     if (!isExpired && data.panelTextures) {
                         state.panelTextures = data.panelTextures;
@@ -1023,13 +1023,13 @@
                     }
                 }
             } catch (e) {
-                console.warn('Не удалось загрузить состояние:', e);
+                console.warn('РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ:', e);
             }
             return false;
         }
 
         /**
-         * Очистка состояния
+         * РћС‡РёСЃС‚РєР° СЃРѕСЃС‚РѕСЏРЅРёСЏ
          */
         function clearState() {
             state.panelTextures = {
@@ -1040,10 +1040,10 @@
             localStorage.removeItem('dr-visualizer-state');
         }
 
-        // ======== ПРЕДЗАГРУЗКА ИЗОБРАЖЕНИЙ ========
+        // ======== РџР Р•Р”Р—РђР“Р РЈР—РљРђ РР—РћР‘Р РђР–Р•РќРР™ ========
         
         /**
-         * Предзагрузка изображения
+         * РџСЂРµРґР·Р°РіСЂСѓР·РєР° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
          */
         function preloadImage(url) {
             return new Promise((resolve, reject) => {
@@ -1055,7 +1055,7 @@
         }
 
         /**
-         * Массовая предзагрузка с ограничением параллельности
+         * РњР°СЃСЃРѕРІР°СЏ РїСЂРµРґР·Р°РіСЂСѓР·РєР° СЃ РѕРіСЂР°РЅРёС‡РµРЅРёРµРј РїР°СЂР°Р»Р»РµР»СЊРЅРѕСЃС‚Рё
          */
         async function preloadImages(urls, limit = 3) {
             const results = { success: [], error: [] };
@@ -1082,13 +1082,13 @@
             return results;
         }
 
-        // ======== ГЕНЕРАЦИЯ МЕНЮ ========
+        // ======== Р“Р•РќР•Р РђР¦РРЇ РњР•РќР® ========
         
         function generateCategories() {
             elements.menuTypes.innerHTML = '';
             
-            // Получаем подкатегории из Бамбуковые панели
-            const bambooData = materialsConfig["Бамбуковые панели"];
+            // РџРѕР»СѓС‡Р°РµРј РїРѕРґРєР°С‚РµРіРѕСЂРёРё РёР· Р‘Р°РјР±СѓРєРѕРІС‹Рµ РїР°РЅРµР»Рё
+            const bambooData = materialsConfig["Р‘Р°РјР±СѓРєРѕРІС‹Рµ РїР°РЅРµР»Рё"];
             if (!bambooData || !bambooData.categories) return;
             
             Object.keys(bambooData.categories).forEach(subcategory => {
@@ -1103,10 +1103,10 @@
 
         function generateTextures(subcategory) {
             elements.menuTextures.innerHTML = '';
-            const textures = materialsConfig["Бамбуковые панели"]?.categories?.[subcategory] || [];
+            const textures = materialsConfig["Р‘Р°РјР±СѓРєРѕРІС‹Рµ РїР°РЅРµР»Рё"]?.categories?.[subcategory] || [];
             
             if (textures.length === 0) {
-                elements.menuTextures.innerHTML = '<p style="padding: 20px; text-align: center; color: #999;">Нет доступных текстур</p>';
+                elements.menuTextures.innerHTML = '<p style="padding: 20px; text-align: center; color: #999;">РќРµС‚ РґРѕСЃС‚СѓРїРЅС‹С… С‚РµРєСЃС‚СѓСЂ</p>';
                 return;
             }
 
@@ -1119,12 +1119,12 @@
                 btn.setAttribute('role', 'listitem');
                 btn.setAttribute('tabindex', '0');
                 
-                // Обработка загрузки изображения
+                // РћР±СЂР°Р±РѕС‚РєР° Р·Р°РіСЂСѓР·РєРё РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
                 const img = new Image();
                 img.onload = () => btn.classList.add('loaded');
                 img.onerror = () => {
                     btn.classList.add('error', 'loaded');
-                    btn.querySelector('span').textContent = 'Ошибка загрузки';
+                    btn.querySelector('span').textContent = 'РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё';
                 };
                 img.src = texture.url;
 
@@ -1132,28 +1132,28 @@
             });
         }
 
-        // ======== ОБРАБОТЧИКИ СОБЫТИЙ ========
+        // ======== РћР‘Р РђР‘РћРўР§РРљР РЎРћР‘Р«РўРР™ ========
         
         function setupEventListeners() {
-            // Кнопка выбора панели (одна общая)
+            // РљРЅРѕРїРєР° РІС‹Р±РѕСЂР° РїР°РЅРµР»Рё (РѕРґРЅР° РѕР±С‰Р°СЏ)
             document.getElementById('selectPanelBtn').addEventListener('click', () => {
                 if (!state.selectedPanel) {
                     state.selectedPanel = 'panelCenter';
                     updatePanelSelection();
-                    showToast('Выбрана центральная панель', 'info', 1500);
+                    showToast('Р’С‹Р±СЂР°РЅР° С†РµРЅС‚СЂР°Р»СЊРЅР°СЏ РїР°РЅРµР»СЊ', 'info', 1500);
                 }
                 openMenu(state.selectedPanel);
             });
 
-            // Клик по панели
+            // РљР»РёРє РїРѕ РїР°РЅРµР»Рё
             Object.entries(elements.panels).forEach(([panelId, panel]) => {
                 panel.addEventListener('click', () => {
                     state.selectedPanel = panelId;
                     updatePanelSelection();
-                    showToast(`Выбрана ${getPanelName(panelId)}`, 'info', 1500);
+                    showToast(`Р’С‹Р±СЂР°РЅР° ${getPanelName(panelId)}`, 'info', 1500);
                 });
 
-                // Клавиатура
+                // РљР»Р°РІРёР°С‚СѓСЂР°
                 panel.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -1164,18 +1164,18 @@
                 });
             });
 
-            // Закрытие меню
+            // Р—Р°РєСЂС‹С‚РёРµ РјРµРЅСЋ
             elements.menuClose.addEventListener('click', closeMenu);
             elements.menuOverlay.addEventListener('click', closeMenu);
             
-            // Закрытие по ESC
+            // Р—Р°РєСЂС‹С‚РёРµ РїРѕ ESC
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && elements.menu.classList.contains('active')) {
                     closeMenu();
                 }
             });
             
-            // Назад к категориям
+            // РќР°Р·Р°Рґ Рє РєР°С‚РµРіРѕСЂРёСЏРј
             elements.menuBack.addEventListener('click', showCategories);
             elements.menuBack.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -1184,7 +1184,7 @@
                 }
             });
 
-            // Выбор категории
+            // Р’С‹Р±РѕСЂ РєР°С‚РµРіРѕСЂРёРё
             elements.menuTypes.addEventListener('click', (e) => {
                 const btn = e.target.closest('.menu__type-btn');
                 if (btn) {
@@ -1193,7 +1193,7 @@
                 }
             });
 
-            // Выбор текстуры
+            // Р’С‹Р±РѕСЂ С‚РµРєСЃС‚СѓСЂС‹
             elements.menuTextures.addEventListener('click', (e) => {
                 const textureBtn = e.target.closest('.texture-btn');
                 if (textureBtn && !textureBtn.classList.contains('error')) {
@@ -1201,11 +1201,11 @@
                 }
             });
 
-            // Кнопка сброса
+            // РљРЅРѕРїРєР° СЃР±СЂРѕСЃР°
             elements.resetBtn.addEventListener('click', resetAllTextures);
         }
 
-        // ======== ФУНКЦИИ МЕНЮ ========
+        // ======== Р¤РЈРќРљР¦РР РњР•РќР® ========
         
         function openMenu(panel) {
             state.currentPanel = panel;
@@ -1217,7 +1217,7 @@
             elements.menuOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Сброс состояния меню
+            // РЎР±СЂРѕСЃ СЃРѕСЃС‚РѕСЏРЅРёСЏ РјРµРЅСЋ
             showCategories();
             updatePanelSelection();
         }
@@ -1227,7 +1227,7 @@
             elements.menuOverlay.classList.remove('active');
             document.body.style.overflow = '';
             
-            // Убираем пульсацию с кнопки после первого выбора
+            // РЈР±РёСЂР°РµРј РїСѓР»СЊСЃР°С†РёСЋ СЃ РєРЅРѕРїРєРё РїРѕСЃР»Рµ РїРµСЂРІРѕРіРѕ РІС‹Р±РѕСЂР°
             const selectBtn = document.getElementById('selectPanelBtn');
             if (selectBtn) {
                 selectBtn.classList.remove('pulse');
@@ -1235,7 +1235,7 @@
         }
 
         function showCategories() {
-            elements.menuTitle.textContent = 'Выберите материал:';
+            elements.menuTitle.textContent = 'Р’С‹Р±РµСЂРёС‚Рµ РјР°С‚РµСЂРёР°Р»:';
             elements.menuTitle.style.display = 'block';
             elements.menuBack.style.display = 'none';
             elements.menuTypes.style.display = 'flex';
@@ -1260,20 +1260,20 @@
                 state.selectedPanel = state.currentPanel || 'panelCenter';
             }
 
-            // Применяем текстуру
+            // РџСЂРёРјРµРЅСЏРµРј С‚РµРєСЃС‚СѓСЂСѓ
             const panel = elements.panels[state.selectedPanel];
             if (panel) {
                 panel.style.backgroundImage = `url("${textureUrl}")`;
                 state.panelTextures[state.selectedPanel] = textureUrl;
                 saveState();
                 
-                // Обновляем активное состояние
+                // РћР±РЅРѕРІР»СЏРµРј Р°РєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
                 document.querySelectorAll('.texture-btn').forEach(btn => btn.classList.remove('active'));
                 textureBtn.classList.add('active');
 
-                showToast('Текстура применена', 'success', 1500);
+                showToast('РўРµРєСЃС‚СѓСЂР° РїСЂРёРјРµРЅРµРЅР°', 'success', 1500);
 
-                // Закрыть меню на мобильных
+                // Р—Р°РєСЂС‹С‚СЊ РјРµРЅСЋ РЅР° РјРѕР±РёР»СЊРЅС‹С…
                 if (window.innerWidth < 768) {
                     setTimeout(closeMenu, 500);
                 }
@@ -1296,12 +1296,12 @@
         }
 
         function updatePanelSelection() {
-            // Снимаем выделение со всех панелей
+            // РЎРЅРёРјР°РµРј РІС‹РґРµР»РµРЅРёРµ СЃРѕ РІСЃРµС… РїР°РЅРµР»РµР№
             Object.values(elements.panels).forEach(panel => {
                 panel.classList.remove('selected');
             });
 
-            // Выделяем выбранную
+            // Р’С‹РґРµР»СЏРµРј РІС‹Р±СЂР°РЅРЅСѓСЋ
             if (state.selectedPanel && elements.panels[state.selectedPanel]) {
                 elements.panels[state.selectedPanel].classList.add('selected');
             }
@@ -1309,33 +1309,33 @@
 
         function getPanelName(panelId) {
             const names = {
-                panelLeft: 'левая панель',
-                panelCenter: 'центральная панель',
-                panelRight: 'правая панель'
+                panelLeft: 'Р»РµРІР°СЏ РїР°РЅРµР»СЊ',
+                panelCenter: 'С†РµРЅС‚СЂР°Р»СЊРЅР°СЏ РїР°РЅРµР»СЊ',
+                panelRight: 'РїСЂР°РІР°СЏ РїР°РЅРµР»СЊ'
             };
             return names[panelId] || panelId;
         }
 
         function resetAllTextures() {
-            if (!confirm('Сбросить все примененные текстуры?')) return;
+            if (!confirm('РЎР±СЂРѕСЃРёС‚СЊ РІСЃРµ РїСЂРёРјРµРЅРµРЅРЅС‹Рµ С‚РµРєСЃС‚СѓСЂС‹?')) return;
 
-            // Разные текстуры из разных серий по умолчанию
-            elements.panelLeft.style.backgroundImage = "url('https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png')"; // Cерия метал - Сатин #1
-            elements.panelCenter.style.backgroundImage = "url('https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png')"; // Cерия мрамор - Белый мрамор
-            elements.panelRight.style.backgroundImage = "url('https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png')"; // Cерия блеск кристала - Кофе с молоком
+            // Р Р°Р·РЅС‹Рµ С‚РµРєСЃС‚СѓСЂС‹ РёР· СЂР°Р·РЅС‹С… СЃРµСЂРёР№ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+            elements.panelLeft.style.backgroundImage = "url('https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png')"; // CРµСЂРёСЏ РјРµС‚Р°Р» - РЎР°С‚РёРЅ #1
+            elements.panelCenter.style.backgroundImage = "url('https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png')"; // CРµСЂРёСЏ РјСЂР°РјРѕСЂ - Р‘РµР»С‹Р№ РјСЂР°РјРѕСЂ
+            elements.panelRight.style.backgroundImage = "url('https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png')"; // CРµСЂРёСЏ Р±Р»РµСЃРє РєСЂРёСЃС‚Р°Р»Р° - РљРѕС„Рµ СЃ РјРѕР»РѕРєРѕРј
 
             clearState();
-            showToast('Все текстуры сброшены', 'info', 2000);
+            showToast('Р’СЃРµ С‚РµРєСЃС‚СѓСЂС‹ СЃР±СЂРѕС€РµРЅС‹', 'info', 2000);
         }
 
-        // ======== ИНИЦИАЛИЗАЦИЯ ========
+        // ======== РРќРР¦РРђР›РР—РђР¦РРЇ ========
         
         async function init() {
             try {
-                // Загружаем сохраненное состояние
+                // Р—Р°РіСЂСѓР¶Р°РµРј СЃРѕС…СЂР°РЅРµРЅРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
                 const hasState = loadState();
                 
-                // Применяем сохраненные текстуры
+                // РџСЂРёРјРµРЅСЏРµРј СЃРѕС…СЂР°РЅРµРЅРЅС‹Рµ С‚РµРєСЃС‚СѓСЂС‹
                 if (hasState) {
                     Object.entries(state.panelTextures).forEach(([panelId, textureUrl]) => {
                         if (textureUrl && elements.panels[panelId]) {
@@ -1343,49 +1343,49 @@
                         }
                     });
                 } else {
-                    // Устанавливаем разные текстуры по умолчанию при первой загрузке
-                    elements.panelLeft.style.backgroundImage = "url('https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png')"; // Cерия метал - Сатин #1
-                    elements.panelCenter.style.backgroundImage = "url('https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png')"; // Cерия мрамор - Белый мрамор
-                    elements.panelRight.style.backgroundImage = "url('https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png')"; // Cерия блеск кристала - Кофе с молоком
+                    // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂР°Р·РЅС‹Рµ С‚РµРєСЃС‚СѓСЂС‹ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РїСЂРё РїРµСЂРІРѕР№ Р·Р°РіСЂСѓР·РєРµ
+                    elements.panelLeft.style.backgroundImage = "url('https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png')"; // CРµСЂРёСЏ РјРµС‚Р°Р» - РЎР°С‚РёРЅ #1
+                    elements.panelCenter.style.backgroundImage = "url('https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png')"; // CРµСЂРёСЏ РјСЂР°РјРѕСЂ - Р‘РµР»С‹Р№ РјСЂР°РјРѕСЂ
+                    elements.panelRight.style.backgroundImage = "url('https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png')"; // CРµСЂРёСЏ Р±Р»РµСЃРє РєСЂРёСЃС‚Р°Р»Р° - РљРѕС„Рµ СЃ РјРѕР»РѕРєРѕРј
                 }
 
-                // Генерируем категории
+                // Р“РµРЅРµСЂРёСЂСѓРµРј РєР°С‚РµРіРѕСЂРёРё
                 generateCategories();
 
-                // Настраиваем обработчики
+                // РќР°СЃС‚СЂР°РёРІР°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРєРё
                 setupEventListeners();
 
-                // Предзагружаем несколько первых текстур для быстродействия
-                const firstTextures = Object.values(materialsConfig["Бамбуковые панели"]?.categories || {})
+                // РџСЂРµРґР·Р°РіСЂСѓР¶Р°РµРј РЅРµСЃРєРѕР»СЊРєРѕ РїРµСЂРІС‹С… С‚РµРєСЃС‚СѓСЂ РґР»СЏ Р±С‹СЃС‚СЂРѕРґРµР№СЃС‚РІРёСЏ
+                const firstTextures = Object.values(materialsConfig["Р‘Р°РјР±СѓРєРѕРІС‹Рµ РїР°РЅРµР»Рё"]?.categories || {})
                     .flat()
                     .slice(0, 6)
                     .map(t => t.url);
                 
-                // Предзагрузка в фоне
+                // РџСЂРµРґР·Р°РіСЂСѓР·РєР° РІ С„РѕРЅРµ
                 preloadImages(firstTextures, 2).catch(console.warn);
 
-                // Скрываем прелоадер
+                // РЎРєСЂС‹РІР°РµРј РїСЂРµР»РѕР°РґРµСЂ
                 setTimeout(() => {
                     elements.preloader.classList.add('hidden');
                     state.isLoading = false;
                 }, 1000);
 
-                console.log('✅ Визуализатор инициализирован');
+                console.log('вњ… Р’РёР·СѓР°Р»РёР·Р°С‚РѕСЂ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅ');
             } catch (error) {
-                console.error('❌ Ошибка инициализации:', error);
-                elements.preloader.querySelector('.preloader__text').textContent = 'Ошибка загрузки';
-                showToast('Ошибка загрузки визуализатора', 'error', 5000);
+                console.error('вќЊ РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё:', error);
+                elements.preloader.querySelector('.preloader__text').textContent = 'РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё';
+                showToast('РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РІРёР·СѓР°Р»РёР·Р°С‚РѕСЂР°', 'error', 5000);
             }
         }
 
-        // Запуск после загрузки DOM
+        // Р—Р°РїСѓСЃРє РїРѕСЃР»Рµ Р·Р°РіСЂСѓР·РєРё DOM
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
             init();
         }
 
-        // Обработка изменения размера окна
+        // РћР±СЂР°Р±РѕС‚РєР° РёР·РјРµРЅРµРЅРёСЏ СЂР°Р·РјРµСЂР° РѕРєРЅР°
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
