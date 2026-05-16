@@ -3,12 +3,18 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
     .dr-instruction {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 80px 20px;
+        width: 100%;
+        margin: 0;
+        padding: 80px 0;
         font-family: 'Inter', 'TildaSans', Arial, sans-serif;
         background: #0f0f0f;
         color: #ffffff;
+    }
+    
+    .dr-instruction__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
     }
     
     .dr-instruction__header {
@@ -53,8 +59,7 @@
     }
     
     .dr-step {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 16px;
         padding: 32px 24px;
         text-align: center;
@@ -63,8 +68,7 @@
     }
     
     .dr-step:hover {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(196, 163, 90, 0.2);
+        border-color: rgba(196, 163, 90, 0.3);
         transform: translateY(-4px);
     }
     
@@ -125,9 +129,8 @@
         align-items: flex-start;
         gap: 16px;
         padding: 24px;
-        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
         border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.04);
     }
     
     .dr-feature__icon {
@@ -234,49 +237,36 @@
     }
     
     @media (max-width: 768px) {
-        .dr-instruction {
-            padding: 50px 16px;
-        }
-        .dr-instruction__title {
-            font-size: 32px;
-        }
-        .dr-steps {
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-        .dr-step {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            text-align: left;
-            padding: 24px;
-        }
-        .dr-step__number {
-            margin: 0;
-            flex-shrink: 0;
-        }
-        .dr-step__icon {
-            display: none;
-        }
-        .dr-step__content {
-            flex: 1;
-        }
-        .dr-features {
-            grid-template-columns: 1fr;
-        }
-        .dr-cta {
-            padding: 40px 24px;
-        }
-        .dr-button {
-            padding: 16px 36px;
-            font-size: 14px;
-            width: 100%;
-            justify-content: center;
-        }
+        .dr-instruction { padding: 50px 0; }
+        .dr-instruction__container { padding: 0 16px; }
+        .dr-instruction__title { font-size: 32px; }
+        .dr-steps { grid-template-columns: 1fr; gap: 16px; }
+        .dr-step { display: flex; align-items: center; gap: 20px; text-align: left; padding: 24px; }
+        .dr-step__number { margin: 0; flex-shrink: 0; }
+        .dr-step__icon { display: none; }
+        .dr-step__content { flex: 1; }
+        .dr-features { grid-template-columns: 1fr; }
+        .dr-cta { padding: 40px 24px; }
+        .dr-button { padding: 16px 36px; font-size: 14px; width: 100%; justify-content: center; }
+    }
+</style>
+
+<style>
+    /* Растягиваем блок на всю ширину в Tilda */
+    #rec123456789 .t-container,
+    #rec123456789 .t-col,
+    #rec123456789 .t-prefix {
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    #rec123456789 .t123__wrapper {
+        padding: 0 !important;
     }
 </style>
 
 <div class="dr-instruction">
+    <div class="dr-instruction__container">
     <!-- Заголовок -->
     <div class="dr-instruction__header">
         <div class="dr-instruction__label">Как пользоваться</div>
@@ -378,5 +368,6 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#c4a35a" style="vertical-align: middle; margin-right: 4px;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
             <span>Совет:</span> используйте Chrome, Safari или Яндекс.Браузер для лучшей производительности
         </div>
+    </div>
     </div>
 </div>
