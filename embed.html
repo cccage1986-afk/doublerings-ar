@@ -4,15 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Визуализатор — DOUBLE RINGS</title>
-    <meta http-equiv="X-Frame-Options" content="ALLOWALL">
-    <meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; }
+        html, body { height: 100%; overflow: hidden; font-family: 'TildaSans', sans-serif; background: #0f0f0f; }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
+        .loader { position: fixed; inset: 0; background: #0f0f0f; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        .spinner { width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1); border-top-color: #c4a35a; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <iframe src="index.html" allow="fullscreen"></iframe>
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
+    <iframe 
+        src="index.html" 
+        allow="fullscreen; autoplay" 
+        allowfullscreen 
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-top-navigation">
+    </iframe>
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+            }, 1000);
+        });
+        // Сообщаем Tilda что iframe загрузился
+        window.addEventListener('message', function(e) {
+            if (e.data === 'getHeight') {
+                e.source.postMessage({height: document.documentElement.scrollHeight}, e.origin);
+            }
+        });
+    </script>
 </body>
 </html>
