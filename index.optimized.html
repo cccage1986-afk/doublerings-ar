@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуализатор — DOUBLE RINGS</title>
+    <meta name="description" content="Примерьте отделочные материалы в интерьере онлайн">
+    
+    <!-- SEO -->
+    <meta property="og:title" content="Визуализатор — DOUBLE RINGS">
+    <meta property="og:description" content="Примерьте бамбуковые панели, гибкий камень и другие материалы в своем интерьере">
+    <meta property="og:type" content="website">
+    
+    <!-- Preconnect для ускорения загрузки -->
+    <link rel="preconnect" href="https://static.tildacdn.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    
+    <style>
+        /* ======== СБРОС И БАЗА ======== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dr-gold: #c4a35a;
+            --dr-gold-hover: #d4b36a;
+            --dr-dark: #0f0f0f;
+            --dr-light: #f5f5f5;
+            --dr-text: #ffffff;
+            --dr-text-muted: rgba(255,255,255,0.6);
+            --dr-shadow: rgba(0,0,0,0.4);
+            --menu-width: 400px;
+            --btn-size: 60px;
+            --btn-size-mobile: 50px;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'TildaSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dr-dark);
+            color: var(--dr-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ======== КОНТЕЙНЕР ВИЗУАЛИЗАТОРА ======== */
+        .visualizer {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        /* Панели */
+        .panel {
+            flex: 1;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            transition: filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        .panel:hover {
+            filter: brightness(1.05);
+        }
+
+        .panel-left {
+            background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80');
+            box-shadow: 2px 0 30px var(--dr-shadow);
+            z-index: 2;
+        }
+
+        .panel-center {
+            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80');
+            z-index: 1;
+        }
+
+        .panel-right {
+            background-image: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80');
+            box-shadow: -2px 0 30px var(--dr-shadow);
+            z-index: 2;
+        }
+
+        /* Индикатор выбранной панели */
+        .panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 3px solid transparent;
+            pointer-events: none;
+            transition: border-color 0.3s ease;
+            z-index: 10;
+        }
+
+        /* ======== МЕБЕЛЬ НА ПЕРЕДНЕМ ПЛАНЕ ======== */
+        .furniture-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .furniture-overlay::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .furniture-overlay img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: bottom center;
+        }
+
+        .panel.selected::before {
+            border-color: var(--dr-gold);
+        }
+
+        /* ======== КНОПКИ УПРАВЛЕНИЯ ======== */
+        .control-btn {
+            position: fixed;
+            width: var(--btn-size);
+            height: var(--btn-size);
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 0;
+        }
+
+        .control-btn:hover {
+            background: var(--dr-gold);
+            border-color: var(--dr-gold);
+            transform: scale(1.1);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        .control-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            transition: fill 0.3s ease;
+        }
+
+        .control-btn:hover svg {
+            fill: var(--dr-dark);
+        }
+
+        .control-btn.left {
+            right: calc(var(--btn-size) + 20px);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .control-btn.center {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .control-btn.right {
+            right: 20px;
+            bottom: 100px;
+            top: auto;
+            transform: translateY(0);
+        }
+
+        /* Анимация пульсации */
+        .control-btn.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(196, 163, 90, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(196, 163, 90, 0); }
+        }
+
+        /* ======== МЕНЮ ВЫБОРА ======== */
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: var(--menu-width);
+            max-width: 90vw;
+            max-height: 80vh;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .menu__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #eee;
+            background: #fafafa;
+            flex-shrink: 0;
+        }
+
+        .menu__title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dr-dark);
+        }
+
+        .menu__close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+            padding: 0;
+        }
+
+        .menu__close:hover {
+            background: #f0f0f0;
+        }
+
+        .menu__close svg {
+            width: 20px;
+            height: 20px;
+            fill: #333;
+        }
+
+        .menu__back {
+            display: none;
+            padding: 15px 25px;
+            color: var(--dr-gold);
+            font-size: 14px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            background: #fafafa;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+
+        .menu__back:hover {
+            background: #f5f5f5;
+        }
+
+        /* Категории */
+        .menu__types {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .menu__types::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .menu__types::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .menu__types::-webkit-scrollbar-thumb {
+            background: var(--dr-gold);
+            border-radius: 3px;
+        }
+
+        .menu__type-btn {
+            padding: 16px 20px;
+            border: none;
+            background: none;
+            text-align: left;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 8px;
+        }
+
+        .menu__type-btn:hover {
+            background: #f8f8f8;
+            color: var(--dr-gold);
+        }
+
+        .menu__type-btn:last-child {
+            border-bottom: none;
+        }
+
+        .menu__type-btn::after {
+            content: '→';
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-weight: bold;
+        }
+
+        .menu__type-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Сетка текстур */
+        .menu__textures {
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            max-height: calc(80vh - 120px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .menu__textures.active {
+            display: flex;
+        }
+
+        .menu__textures::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .menu__textures::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .menu__textures::-webkit-scrollbar-thumb {
+            background: var(--dr-gold);
+            border-radius: 3px;
+        }
+
+        .texture-btn {
+            width: calc(50% - 5px);
+            aspect-ratio: 1/0.7;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            background-color: #f0f0f0;
+        }
+
+        .texture-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 200%;
+            animation: shimmer 1.5s infinite;
+            z-index: 1;
+        }
+
+        .texture-btn.loaded::before {
+            display: none;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .texture-btn:hover {
+            transform: scale(1.02);
+            border-color: var(--dr-gold);
+            z-index: 2;
+        }
+
+        .texture-btn.active {
+            border-color: var(--dr-gold);
+            box-shadow: 0 0 0 3px rgba(196, 163, 90, 0.2);
+        }
+
+        .texture-btn.active::after {
+            content: '✓';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: var(--dr-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 3;
+        }
+
+        .texture-btn span {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .texture-btn:hover span {
+            opacity: 1;
+        }
+
+        /* Состояние загрузки текстуры */
+        .texture-btn.error {
+            background: #ffe0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .texture-btn.error::after {
+            content: '⚠️';
+            font-size: 24px;
+        }
+
+        .texture-btn.error span {
+            opacity: 1;
+            background: rgba(0,0,0,0.6);
+        }
+
+        /* ======== ШАПКА ======== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .header > * {
+            pointer-events: auto;
+        }
+
+        .header__logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dr-gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .header__logo:hover {
+            opacity: 0.8;
+        }
+
+        .header__phone {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .header__phone:hover {
+            opacity: 1;
+        }
+
+        /* ======== ПОДВАЛ ======== */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .footer > * {
+            pointer-events: auto;
+        }
+
+        .order-btn {
+            padding: 14px 28px;
+            background: var(--dr-gold);
+            color: var(--dr-dark);
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .order-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .order-btn:active {
+            transform: translateY(0);
+        }
+
+        .order-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* ======== АДАПТИВНОСТЬ ======== */
+        @media (max-width: 1024px) {
+            :root {
+                --menu-width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --btn-size: var(--btn-size-mobile);
+            }
+
+            .visualizer {
+                flex-direction: column;
+            }
+
+            .panel {
+                flex: none;
+                height: 33.33%;
+            }
+
+            .panel-left,
+            .panel-right {
+                box-shadow: none;
+            }
+
+            .panel::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            }
+
+            .panel-left::after { bottom: 0; }
+            .panel-right::after { top: 0; }
+
+            .control-btn {
+                width: var(--btn-size-mobile);
+                height: var(--btn-size-mobile);
+            }
+
+            .control-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .control-btn.left { 
+                right: calc(var(--btn-size-mobile) + 15px);
+            }
+            
+            .control-btn.center { 
+                right: 15px;
+            }
+            
+            .control-btn.right { 
+                display: none;
+            }
+
+            .menu {
+                width: 95vw;
+                max-height: 85vh;
+            }
+
+            .texture-btn {
+                width: calc(50% - 5px);
+            }
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .header__logo {
+                font-size: 16px;
+            }
+
+            .header__phone {
+                font-size: 13px;
+            }
+
+            .footer {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .order-btn {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .texture-btn span {
+                opacity: 1;
+                font-size: 10px;
+            }
+
+            .menu__type-btn {
+                font-size: 14px;
+                padding: 14px 16px;
+            }
+
+            .order-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ======== ПРЕЛОАДЕР ======== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--dr-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader__spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--dr-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .preloader__text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--dr-text-muted);
+            letter-spacing: 1px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ======== УВЕДОМЛЕНИЯ ======== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .toast.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            background: rgba(76, 175, 80, 0.9);
+        }
+
+        .toast.error {
+            background: rgba(244, 67, 54, 0.9);
+        }
+
+        .toast svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* ======== КНОПКА СБРОСА ======== */
+        .reset-btn {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 0;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: white;
+        }
+
+        .reset-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        @media (max-width: 768px) {
+            .reset-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader" aria-live="polite">
+        <div class="preloader__spinner"></div>
+        <div class="preloader__text">Загрузка визуализатора...</div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="header">
+        <a href="https://doublerings.ru" class="header__logo">DOUBLE RINGS</a>
+        <a href="tel:+79140602143" class="header__phone">+7 (914) 060-21-43</a>
+    </header>
+
+    <!-- Визуализатор -->
+    <div class="visualizer" role="region" aria-label="Визуализатор интерьеров">
+        <div class="panel panel-left" id="panelLeft" role="button" aria-label="Левая панель" tabindex="0"></div>
+        <div class="panel panel-center" id="panelCenter" role="button" aria-label="Центральная панель" tabindex="0"></div>
+        <div class="panel panel-right" id="panelRight" role="button" aria-label="Правая панель" tabindex="0"></div>
+        
+        <!-- Мебель на переднем плане -->
+        <div class="furniture-overlay" aria-hidden="true">
+            <img src="images/sofa.png" alt="Угловой диван">
+        </div>
+    </div>
+
+    <!-- Кнопки управления -->
+    <button class="control-btn pulse left" data-panel="panel-left" aria-label="Выбрать левую панель">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="control-btn pulse center" data-panel="panel-center" aria-label="Выбрать центральную панель">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    </button>
+    <button class="control-btn pulse right" data-panel="panel-right" aria-label="Выбрать правую панель">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+    </button>
+
+    <!-- Кнопка сброса -->
+    <button class="reset-btn" id="resetBtn" aria-label="Сбросить все текстуры" title="Сбросить все текстуры">
+        <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+    </button>
+
+    <!-- Меню выбора -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+        <div class="menu__header">
+            <div class="menu__title" id="menuTitle">Выберите материал:</div>
+            <button class="menu__close" id="menuClose" aria-label="Закрыть меню">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+        </div>
+        <div class="menu__back" id="menuBack" role="button" tabindex="0">← К категориям</div>
+        <div class="menu__types" id="menuTypes" role="list"></div>
+        <div class="menu__textures" id="menuTextures" role="list"></div>
+    </div>
+
+    <!-- Подвал с кнопками -->
+    <footer class="footer">
+        <button class="order-btn" id="orderWhatsapp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+        </button>
+        <button class="order-btn" id="orderCall">
+            <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.49-5.15-3.8-6.62-6.62l1.97-1.57c.26-.26.35-.62.24-1.01a11.36 11.36 0 01-.56-3.53c0-.54-.45-.99-.99-.99H4.19C3.65 3.3 3 3.24 3 4.19c0 9.28 7.53 16.81 16.81 16.81.95 0 .89-.65.89-1.19v-3.79c0-.54-.45-.99-.99-.99z"/></svg>
+            Позвонить
+        </button>
+    </footer>
+
+    <!-- Уведомления -->
+    <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+    <script>
+        // ======== КОНФИГУРАЦИЯ МАТЕРИАЛОВ ========
+        const materialsConfig = {
+            "Бамбуковые панели": {
+                "id": "961039857472",
+                "textures": [
+                    {
+                        "id": "texture-184680735802",
+                        "name": "Стандарт - 5 - Художественная краска №1",
+                        "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"
+                    },
+                    {
+                        "id": "texture-429841666942",
+                        "name": "Стандарт - 8 - Художественная краска №1",
+                        "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"
+                    },
+                    {
+                        "id": "texture-753102950012",
+                        "name": "Высокая Плотность - 8 - Художественная краска №1",
+                        "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"
+                    },
+                    {
+                        "id": "texture-377459153372",
+                        "name": "Ударопрочная - 8 - Художественная краска №1",
+                        "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"
+                    },
+                    {
+                        "id": "texture-144272234062",
+                        "name": "Стандарт - 5 - Художественная краска №2",
+                        "url": "https://static.tildacdn.com/stor6664-3264-4735-a564-333037323639/22351908.png"
+                    },
+                    {
+                        "id": "texture-696271460812",
+                        "name": "Стандарт - 8 - Художественная краска №2",
+                        "url": "https://static.tildacdn.com/stor6664-3264-4735-a564-333037323639/22351908.png"
+                    }
+                ]
+            },
+            "Гибкий Камень": {
+                "id": "893822002132",
+                "textures": [
+                    {
+                        "id": "texture-941049020192",
+                        "name": "Базовый",
+                        "url": "https://static.tildacdn.com/stor3838-6463-4761-b932-386430366136/94410658.jpg"
+                    }
+                ]
+            },
+            "Полиуретановые панели": {
+                "id": "253477225172",
+                "textures": [
+                    {
+                        "id": "texture-476800373002",
+                        "name": "Cкальный камень №2",
+                        "url": "https://static.tildacdn.com/stor3165-6665-4663-a266-313134643539/10868841.png"
+                    },
+                    {
+                        "id": "texture-297773552222",
+                        "name": "Cкальный камень №2 - Внешний угол",
+                        "url": "https://static.tildacdn.com/stor3735-6232-4336-b234-356166663136/17108353.png"
+                    },
+                    {
+                        "id": "texture-739664434072",
+                        "name": "Cкальный камень №2 - Внутренний угол",
+                        "url": "https://static.tildacdn.com/stor3835-6161-4661-b366-393063653466/28116732.png"
+                    }
+                ]
+            },
+            "Вспененный алюминий": {
+                "id": "681287319312",
+                "textures": [
+                    {
+                        "id": "texture-470714387972",
+                        "name": "Базовый",
+                        "url": "https://static.tildacdn.com/stor3364-6534-4339-a262-353338633137/40515634.png"
+                    }
+                ]
+            },
+            "Вельвет": {
+                "id": "713732679492",
+                "textures": [
+                    {
+                        "id": "texture-687952792092",
+                        "name": "A - Карминно-красный",
+                        "url": "https://static.tildacdn.com/stor6432-3438-4664-a332-653134366532/39347110.jpg"
+                    },
+                    {
+                        "id": "texture-329045394452",
+                        "name": "A - Темный зеленый",
+                        "url": "https://static.tildacdn.com/stor6631-6562-4362-a466-323037393135/31965148.jpg"
+                    },
+                    {
+                        "id": "texture-419214487682",
+                        "name": "A - Пастельно-бирюзовый",
+                        "url": "https://static.tildacdn.com/stor6430-6439-4430-b061-643265653463/58707720.jpg"
+                    },
+                    {
+                        "id": "texture-596961853192",
+                        "name": "A - Коричневый",
+                        "url": "https://static.tildacdn.com/stor3337-3930-4437-a337-366436343837/61300484.jpg"
+                    },
+                    {
+                        "id": "texture-842997959422",
+                        "name": "A - Агатовый серый",
+                        "url": "https://static.tildacdn.com/stor6234-6633-4566-b432-376166346334/89844478.png"
+                    },
+                    {
+                        "id": "texture-848964360752",
+                        "name": "A - Розово-коричневый",
+                        "url": "https://static.tildacdn.com/stor3134-6334-4166-b263-373366303434/66009560.jpg"
+                    }
+                ]
+            },
+            "Замша": {
+                "id": "812997504432",
+                "textures": [
+                    {
+                        "id": "texture-977371515442",
+                        "name": "A - Ядовито-зеленый",
+                        "url": "https://static.tildacdn.com/stor6434-6562-4665-b039-383934343561/94199828.png"
+                    },
+                    {
+                        "id": "texture-438642621662",
+                        "name": "A - Бледно-розовый",
+                        "url": "https://static.tildacdn.com/stor6664-6264-4239-a265-313061323762/28749497.png"
+                    },
+                    {
+                        "id": "texture-353258523262",
+                        "name": "A - Ниагара",
+                        "url": "https://static.tildacdn.com/stor6464-3037-4530-a232-663032343433/17869187.png"
+                    },
+                    {
+                        "id": "texture-685955936782",
+                        "name": "A - Перламутровый светло-серый",
+                        "url": "https://static.tildacdn.com/stor6265-3331-4335-b863-333462356337/62003849.png"
+                    },
+                    {
+                        "id": "texture-684010414292",
+                        "name": "A - Агатовый серый",
+                        "url": "https://static.tildacdn.com/stor3462-3135-4632-a338-303230663261/16685283.png"
+                    },
+                    {
+                        "id": "texture-658961549462",
+                        "name": "B - Рыжий",
+                        "url": "https://static.tildacdn.com/stor6464-3366-4339-b731-386266643233/68364326.jpg"
+                    }
+                ]
+            },
+            "Экокожа": {
+                "id": "136053640902",
+                "textures": [
+                    {
+                        "id": "texture-183440160502",
+                        "name": "A - Белый-розовый",
+                        "url": "https://static.tildacdn.com/stor6438-3033-4334-b161-353438643931/48044953.jpg"
+                    },
+                    {
+                        "id": "texture-218059175202",
+                        "name": "A - Белый-розовый (текстура)",
+                        "url": "https://static.tildacdn.com/stor3164-3637-4966-b437-356333393833/96148893.jpg"
+                    },
+                    {
+                        "id": "texture-458176339492",
+                        "name": "A - Оранжевый",
+                        "url": "https://static.tildacdn.com/stor3632-3065-4564-a565-376165623439/19002417.jpg"
+                    },
+                    {
+                        "id": "texture-324792765102",
+                        "name": "A - Оранжевый (текстура)",
+                        "url": "https://static.tildacdn.com/stor3638-6531-4761-a538-663235663566/77331753.jpg"
+                    },
+                    {
+                        "id": "texture-110384381142",
+                        "name": "A - Сырая охра",
+                        "url": "https://static.tildacdn.com/stor3366-3637-4232-a437-653938643730/67021949.jpg"
+                    },
+                    {
+                        "id": "texture-262339076022",
+                        "name": "A - Сырая охра (текстура)",
+                        "url": "https://static.tildacdn.com/stor6336-3562-4465-a261-643461386635/39793381.jpg"
+                    }
+                ]
+            }
+        };
+
+        // ======== СОСТОЯНИЕ ПРИЛОЖЕНИЯ ========
+        const state = {
+            currentPanel: null,
+            selectedPanel: null,
+            selectedTexture: null,
+            panelTextures: {
+                panelLeft: null,
+                panelCenter: null,
+                panelRight: null
+            },
+            isLoading: true
+        };
+
+        // ======== ЭЛЕМЕНТЫ DOM ========
+        const elements = {
+            menu: document.getElementById('menu'),
+            menuOverlay: document.getElementById('menuOverlay'),
+            menuTitle: document.getElementById('menuTitle'),
+            menuClose: document.getElementById('menuClose'),
+            menuBack: document.getElementById('menuBack'),
+            menuTypes: document.getElementById('menuTypes'),
+            menuTextures: document.getElementById('menuTextures'),
+            controlBtns: document.querySelectorAll('.control-btn'),
+            preloader: document.getElementById('preloader'),
+            panels: {
+                panelLeft: document.getElementById('panelLeft'),
+                panelCenter: document.getElementById('panelCenter'),
+                panelRight: document.getElementById('panelRight')
+            },
+            toast: document.getElementById('toast'),
+            resetBtn: document.getElementById('resetBtn')
+        };
+
+        // ======== УТИЛИТЫ ========
+        
+        /**
+         * Нормализация URL для надежного сравнения
+         */
+        function normalizeUrl(url) {
+            if (!url) return '';
+            return url
+                .replace(/^url\(["']?/, '')
+                .replace(/["']?\)$/, '')
+                .trim();
+        }
+
+        /**
+         * Проверка валидности URL
+         */
+        function isValidUrl(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        /**
+         * Показ уведомления
+         */
+        function showToast(message, type = 'info', duration = 3000) {
+            const toast = elements.toast;
+            const icons = {
+                success: '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
+                error: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',
+                info: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
+            };
+
+            toast.innerHTML = `${icons[type] || icons.info}<span>${message}</span>`;
+            toast.className = `toast ${type} visible`;
+
+            setTimeout(() => {
+                toast.classList.remove('visible');
+            }, duration);
+        }
+
+        /**
+         * Сохранение состояния в localStorage
+         */
+        function saveState() {
+            try {
+                const dataToSave = {
+                    panelTextures: state.panelTextures,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem('dr-visualizer-state', JSON.stringify(dataToSave));
+            } catch (e) {
+                console.warn('Не удалось сохранить состояние:', e);
+            }
+        }
+
+        /**
+         * Загрузка состояния из localStorage
+         */
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('dr-visualizer-state');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    // Проверяем актуальность (не старше 7 дней)
+                    const isExpired = Date.now() - data.timestamp > 7 * 24 * 60 * 60 * 1000;
+                    if (!isExpired && data.panelTextures) {
+                        state.panelTextures = data.panelTextures;
+                        return true;
+                    }
+                }
+            } catch (e) {
+                console.warn('Не удалось загрузить состояние:', e);
+            }
+            return false;
+        }
+
+        /**
+         * Очистка состояния
+         */
+        function clearState() {
+            state.panelTextures = {
+                panelLeft: null,
+                panelCenter: null,
+                panelRight: null
+            };
+            localStorage.removeItem('dr-visualizer-state');
+        }
+
+        // ======== ПРЕДЗАГРУЗКА ИЗОБРАЖЕНИЙ ========
+        
+        /**
+         * Предзагрузка изображения
+         */
+        function preloadImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(url);
+                img.onerror = () => reject(url);
+                img.src = url;
+            });
+        }
+
+        /**
+         * Массовая предзагрузка с ограничением параллельности
+         */
+        async function preloadImages(urls, limit = 3) {
+            const results = { success: [], error: [] };
+            
+            async function processBatch(batch) {
+                await Promise.allSettled(
+                    batch.map(url => 
+                        preloadImage(url)
+                            .then(() => results.success.push(url))
+                            .catch(() => results.error.push(url))
+                    )
+                );
+            }
+
+            const batches = [];
+            for (let i = 0; i < urls.length; i += limit) {
+                batches.push(urls.slice(i, i + limit));
+            }
+
+            for (const batch of batches) {
+                await processBatch(batch);
+            }
+
+            return results;
+        }
+
+        // ======== ГЕНЕРАЦИЯ МЕНЮ ========
+        
+        function generateCategories() {
+            elements.menuTypes.innerHTML = '';
+            
+            Object.keys(materialsConfig).forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = 'menu__type-btn';
+                btn.textContent = category;
+                btn.dataset.category = category;
+                btn.setAttribute('role', 'listitem');
+                elements.menuTypes.appendChild(btn);
+            });
+        }
+
+        function generateTextures(category) {
+            elements.menuTextures.innerHTML = '';
+            const textures = materialsConfig[category]?.textures || [];
+            
+            if (textures.length === 0) {
+                elements.menuTextures.innerHTML = '<p style="padding: 20px; text-align: center; color: #999;">Нет доступных текстур</p>';
+                return;
+            }
+
+            textures.forEach(texture => {
+                const btn = document.createElement('div');
+                btn.className = 'texture-btn';
+                btn.style.backgroundImage = `url("${texture.url}")`;
+                btn.dataset.textureUrl = texture.url;
+                btn.dataset.textureId = texture.id;
+                btn.innerHTML = `<span>${texture.name}</span>`;
+                btn.setAttribute('role', 'listitem');
+                btn.setAttribute('tabindex', '0');
+                
+                // Обработка загрузки изображения
+                const img = new Image();
+                img.onload = () => btn.classList.add('loaded');
+                img.onerror = () => {
+                    btn.classList.add('error', 'loaded');
+                    btn.querySelector('span').textContent = 'Ошибка загрузки';
+                };
+                img.src = texture.url;
+
+                elements.menuTextures.appendChild(btn);
+            });
+        }
+
+        // ======== ОБРАБОТЧИКИ СОБЫТИЙ ========
+        
+        function setupEventListeners() {
+            // Кнопки управления панелями
+            elements.controlBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const panel = btn.dataset.panel;
+                    openMenu(panel);
+                });
+            });
+
+            // Клик по панели
+            Object.entries(elements.panels).forEach(([panelId, panel]) => {
+                panel.addEventListener('click', () => {
+                    state.selectedPanel = panelId;
+                    updatePanelSelection();
+                    showToast(`Выбрана ${getPanelName(panelId)}`, 'info', 1500);
+                });
+
+                // Клавиатура
+                panel.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        state.selectedPanel = panelId;
+                        updatePanelSelection();
+                        openMenu(panelId);
+                    }
+                });
+            });
+
+            // Закрытие меню
+            elements.menuClose.addEventListener('click', closeMenu);
+            elements.menuOverlay.addEventListener('click', closeMenu);
+            
+            // Закрытие по ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && elements.menu.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+            
+            // Назад к категориям
+            elements.menuBack.addEventListener('click', showCategories);
+            elements.menuBack.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    showCategories();
+                }
+            });
+
+            // Выбор категории
+            elements.menuTypes.addEventListener('click', (e) => {
+                const btn = e.target.closest('.menu__type-btn');
+                if (btn) {
+                    const category = btn.dataset.category;
+                    selectCategory(category);
+                }
+            });
+
+            // Выбор текстуры
+            elements.menuTextures.addEventListener('click', (e) => {
+                const textureBtn = e.target.closest('.texture-btn');
+                if (textureBtn && !textureBtn.classList.contains('error')) {
+                    selectTexture(textureBtn);
+                }
+            });
+
+            // Кнопка сброса
+            elements.resetBtn.addEventListener('click', resetAllTextures);
+
+            // Кнопки заказа
+            document.getElementById('orderWhatsapp').addEventListener('click', () => {
+                const message = encodeURIComponent('Здравствуйте! Хочу заказать отделочные материалы через визуализатор.');
+                window.open(`https://wa.me/79140602143?text=${message}`, '_blank');
+            });
+
+            document.getElementById('orderCall').addEventListener('click', () => {
+                window.location.href = 'tel:+79140602143';
+            });
+        }
+
+        // ======== ФУНКЦИИ МЕНЮ ========
+        
+        function openMenu(panel) {
+            state.currentPanel = panel;
+            if (!state.selectedPanel) {
+                state.selectedPanel = panel;
+            }
+            
+            elements.menu.classList.add('active');
+            elements.menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Сброс состояния меню
+            showCategories();
+            updatePanelSelection();
+        }
+
+        function closeMenu() {
+            elements.menu.classList.remove('active');
+            elements.menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Убираем пульсацию с кнопок после первого выбора
+            elements.controlBtns.forEach(btn => {
+                btn.classList.remove('pulse');
+            });
+        }
+
+        function showCategories() {
+            elements.menuTitle.textContent = 'Выберите материал:';
+            elements.menuTitle.style.display = 'block';
+            elements.menuBack.style.display = 'none';
+            elements.menuTypes.style.display = 'flex';
+            elements.menuTextures.classList.remove('active');
+            checkSelectedTexture();
+        }
+
+        function selectCategory(category) {
+            elements.menuTitle.textContent = category;
+            elements.menuBack.style.display = 'block';
+            elements.menuTypes.style.display = 'none';
+            
+            generateTextures(category);
+            elements.menuTextures.classList.add('active');
+            checkSelectedTexture();
+        }
+
+        function selectTexture(textureBtn) {
+            const textureUrl = textureBtn.dataset.textureUrl;
+            
+            if (!state.selectedPanel) {
+                state.selectedPanel = state.currentPanel || 'panelCenter';
+            }
+
+            // Применяем текстуру
+            const panel = elements.panels[state.selectedPanel];
+            if (panel) {
+                panel.style.backgroundImage = `url("${textureUrl}")`;
+                state.panelTextures[state.selectedPanel] = textureUrl;
+                saveState();
+                
+                // Обновляем активное состояние
+                document.querySelectorAll('.texture-btn').forEach(btn => btn.classList.remove('active'));
+                textureBtn.classList.add('active');
+
+                showToast('Текстура применена', 'success', 1500);
+
+                // Закрыть меню на мобильных
+                if (window.innerWidth < 768) {
+                    setTimeout(closeMenu, 500);
+                }
+            }
+        }
+
+        function checkSelectedTexture() {
+            if (!state.selectedPanel) return;
+
+            const currentTexture = state.panelTextures[state.selectedPanel];
+            
+            document.querySelectorAll('.texture-btn').forEach(btn => {
+                const btnUrl = normalizeUrl(btn.dataset.textureUrl);
+                const panelUrl = normalizeUrl(currentTexture);
+                
+                if (btnUrl && panelUrl && btnUrl === panelUrl) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function updatePanelSelection() {
+            // Снимаем выделение со всех панелей
+            Object.values(elements.panels).forEach(panel => {
+                panel.classList.remove('selected');
+            });
+
+            // Выделяем выбранную
+            if (state.selectedPanel && elements.panels[state.selectedPanel]) {
+                elements.panels[state.selectedPanel].classList.add('selected');
+            }
+        }
+
+        function getPanelName(panelId) {
+            const names = {
+                panelLeft: 'левая панель',
+                panelCenter: 'центральная панель',
+                panelRight: 'правая панель'
+            };
+            return names[panelId] || panelId;
+        }
+
+        function resetAllTextures() {
+            if (!confirm('Сбросить все примененные текстуры?')) return;
+
+            // Возвращаем исходные изображения
+            elements.panelLeft.style.backgroundImage = "url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80')";
+            elements.panelCenter.style.backgroundImage = "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80')";
+            elements.panelRight.style.backgroundImage = "url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80')";
+
+            clearState();
+            showToast('Все текстуры сброшены', 'info', 2000);
+        }
+
+        // ======== ИНИЦИАЛИЗАЦИЯ ========
+        
+        async function init() {
+            try {
+                // Загружаем сохраненное состояние
+                const hasState = loadState();
+                
+                // Применяем сохраненные текстуры
+                if (hasState) {
+                    Object.entries(state.panelTextures).forEach(([panelId, textureUrl]) => {
+                        if (textureUrl && elements.panels[panelId]) {
+                            elements.panels[panelId].style.backgroundImage = `url("${textureUrl}")`;
+                        }
+                    });
+                }
+
+                // Генерируем категории
+                generateCategories();
+
+                // Настраиваем обработчики
+                setupEventListeners();
+
+                // Предзагружаем несколько первых текстур для быстродействия
+                const firstTextures = Object.values(materialsConfig)
+                    .flatMap(cat => cat.textures.slice(0, 2))
+                    .map(t => t.url);
+                
+                // Предзагрузка в фоне
+                preloadImages(firstTextures, 2).catch(console.warn);
+
+                // Скрываем прелоадер
+                setTimeout(() => {
+                    elements.preloader.classList.add('hidden');
+                    state.isLoading = false;
+                }, 1000);
+
+                console.log('✅ Визуализатор инициализирован');
+            } catch (error) {
+                console.error('❌ Ошибка инициализации:', error);
+                elements.preloader.querySelector('.preloader__text').textContent = 'Ошибка загрузки';
+                showToast('Ошибка загрузки визуализатора', 'error', 5000);
+            }
+        }
+
+        // Запуск после загрузки DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // Обработка изменения размера окна
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (state.selectedPanel) {
+                    updatePanelSelection();
+                }
+            }, 250);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+{
+    "Бамбуковые панели": {
+        "id": "bamboo-main",
+        "categories": {
+            "Cерия ткань": [
+                {
+                    "name": "Художественная краска №1",
+                    "url": "https://static.tildacdn.com/stor3931-6561-4763-a539-393830613337/93929757.png"
+                },
+                {
+                    "name": "Художественная краска №2",
+                    "url": "https://static.tildacdn.com/stor6664-3264-4735-a564-333037323639/22351908.png"
+                },
+                {
+                    "name": "Пьянящий шёлк №1",
+                    "url": "https://static.tildacdn.com/stor3963-3933-4365-a461-636665333136/54637823.png"
+                },
+                {
+                    "name": "Великий шелковый путь №2",
+                    "url": "https://static.tildacdn.com/stor3331-3162-4138-a266-366132353664/87205311.png"
+                },
+                {
+                    "name": "Косая тень №4",
+                    "url": "https://static.tildacdn.com/stor3133-3264-4431-a561-366432373333/29386382.png"
+                },
+                {
+                    "name": "Льняной атлас",
+                    "url": "https://static.tildacdn.com/stor6536-6562-4064-b830-343861373738/36447810.png"
+                },
+                {
+                    "name": "Моранди #2",
+                    "url": "https://static.tildacdn.com/stor6336-3330-4434-b461-626666643137/83749775.png"
+                },
+                {
+                    "name": "Моранди #3",
+                    "url": "https://static.tildacdn.com/stor3937-3830-4066-b662-323266316234/86839348.png"
+                },
+                {
+                    "name": "Моранди #4",
+                    "url": "https://static.tildacdn.com/stor6436-3834-4262-b231-343036393064/68168198.png"
+                },
+                {
+                    "name": "Моранди #5",
+                    "url": "https://static.tildacdn.com/stor6265-3334-4763-a361-633838336261/79083154.png"
+                },
+                {
+                    "name": "Прага #3",
+                    "url": "https://static.tildacdn.com/stor6132-3731-4761-b337-663563346238/64509578.png"
+                },
+                {
+                    "name": "Звездная ткань #3",
+                    "url": "https://static.tildacdn.com/stor6333-3838-4461-a365-633065613939/52543867.png"
+                },
+                {
+                    "name": "Шёлковый узор #1",
+                    "url": "https://static.tildacdn.com/stor3862-6631-4131-b866-353733643865/13121723.png"
+                }
+            ],
+            "Cерия дерево": [
+                {
+                    "name": "Шведский дуб №2",
+                    "url": "https://static.tildacdn.com/stor3330-3639-4338-b832-323330653061/79958077.png"
+                },
+                {
+                    "name": "Североамериканский клён №2",
+                    "url": "https://static.tildacdn.com/stor3062-3966-4631-a165-333061373061/41562368.png"
+                },
+                {
+                    "name": "Североамериканский клён №3",
+                    "url": "https://static.tildacdn.com/stor3731-3337-4562-a439-633866646332/59287598.png"
+                },
+                {
+                    "name": "Серебристый шелк №5",
+                    "url": "https://static.tildacdn.com/stor3435-3434-4333-a266-333932333737/68500598.png"
+                },
+                {
+                    "name": "Обработанное дерево №4",
+                    "url": "https://static.tildacdn.com/stor3866-3565-4732-b964-653166303034/97440476.png"
+                },
+                {
+                    "name": "Светлый дуб №3",
+                    "url": "https://static.tildacdn.com/stor3633-3966-4631-b161-633766353333/52719915.png"
+                },
+                {
+                    "name": "Светлый дуб №5",
+                    "url": "https://static.tildacdn.com/stor3737-3331-4430-b137-653930306439/40356406.png"
+                },
+                {
+                    "name": "Светлый дуб №6",
+                    "url": "https://static.tildacdn.com/stor3539-3536-4561-b062-346338643933/88976939.png"
+                },
+                {
+                    "name": "Орешник №1",
+                    "url": "https://static.tildacdn.com/stor6235-3466-4166-b437-623535306133/36432447.png"
+                },
+                {
+                    "name": "Орешник №4",
+                    "url": "https://static.tildacdn.com/stor6636-6530-4663-b561-666132643261/51085779.png"
+                },
+                {
+                    "name": "Золотой шелк №1",
+                    "url": "https://static.tildacdn.com/stor3933-3037-4361-a562-353963663463/49870186.png"
+                },
+                {
+                    "name": "Золотой шелк №2",
+                    "url": "https://static.tildacdn.com/stor6339-3930-4333-b433-393734333436/32211985.png"
+                },
+                {
+                    "name": "Золотой шелк №3",
+                    "url": "https://static.tildacdn.com/stor6263-3537-4331-b134-396462326435/32780444.png"
+                },
+                {
+                    "name": "Груша №7",
+                    "url": "https://static.tildacdn.com/stor3336-6533-4665-a437-613432643538/55370785.png"
+                }
+            ],
+            "Cерия метал": [
+                {
+                    "name": "Cерия метал",
+                    "url": "https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png"
+                },
+                {
+                    "name": "Сатин #1",
+                    "url": "https://static.tildacdn.com/stor6165-6666-4832-b761-306361343461/29442684.png"
+                },
+                {
+                    "name": "Сатин #2",
+                    "url": "https://static.tildacdn.com/stor6537-6561-4235-a266-306338626665/88205363.png"
+                },
+                {
+                    "name": "Сатин #3",
+                    "url": "https://static.tildacdn.com/stor6438-6461-4534-b732-653239366164/32799585.png"
+                },
+                {
+                    "name": "Сатин #4",
+                    "url": "https://static.tildacdn.com/stor3961-6635-4231-b332-393565623734/84455552.png"
+                },
+                {
+                    "name": "Сатин #5",
+                    "url": "https://static.tildacdn.com/stor3735-3631-4462-b861-386535653266/25295316.png"
+                },
+                {
+                    "name": "Сатин #6",
+                    "url": "https://static.tildacdn.com/stor6264-6630-4666-a636-386631303362/88620752.png"
+                },
+                {
+                    "name": "Romano рельефная #1",
+                    "url": "https://static.tildacdn.com/stor3633-3539-4337-a535-316539653630/89429647.png"
+                },
+                {
+                    "name": "Romano рельефная #2",
+                    "url": "https://static.tildacdn.com/stor6666-6237-4265-a334-613933666331/36074273.png"
+                },
+                {
+                    "name": "Romano рельефная #3",
+                    "url": "https://static.tildacdn.com/stor6339-3137-4236-b436-373939633333/38373652.png"
+                },
+                {
+                    "name": "Cатин металлическая #1",
+                    "url": "https://static.tildacdn.com/stor6134-6137-4761-b633-336634636330/72443336.png"
+                },
+                {
+                    "name": "Cатин металлическая #2",
+                    "url": "https://static.tildacdn.com/stor3164-6232-4533-b736-353262303238/22885446.png"
+                },
+                {
+                    "name": "Cатин металлическая #3",
+                    "url": "https://static.tildacdn.com/stor6466-3461-4534-b366-656666313963/89419454.png"
+                },
+                {
+                    "name": "Cатин металлическая #4",
+                    "url": "https://static.tildacdn.com/stor6131-6636-4662-b462-356238343234/83442606.png"
+                },
+                {
+                    "name": "Металлик песочным текстурированием #1",
+                    "url": "https://static.tildacdn.com/stor6562-3166-4361-b138-653665633762/18987106.png"
+                }
+            ],
+            "Cерия мрамор": [
+                {
+                    "name": "Афина",
+                    "url": "https://static.tildacdn.com/stor3831-3130-4739-b565-343935323961/24835080.png"
+                },
+                {
+                    "name": "Романтика",
+                    "url": "https://static.tildacdn.com/stor3461-3433-4065-a335-353935396632/54407170.png"
+                },
+                {
+                    "name": "Черный оникс (обсидиан)",
+                    "url": "https://static.tildacdn.com/stor3933-3464-4137-b539-643033323539/55485807.png"
+                },
+                {
+                    "name": "Камень 8870",
+                    "url": "https://static.tildacdn.com/stor3033-6537-4362-b139-653230336164/84980544.png"
+                },
+                {
+                    "name": "2",
+                    "url": "https://static.tildacdn.com/stor6661-3864-4466-a533-333365623862/85437427.png"
+                },
+                {
+                    "name": "Ракушечник",
+                    "url": "https://static.tildacdn.com/stor3361-3735-4231-a134-633664623365/42805634.png"
+                },
+                {
+                    "name": "Светло-серый пепел",
+                    "url": "https://static.tildacdn.com/stor6231-3838-4130-b136-646636353537/63407141.png"
+                },
+                {
+                    "name": "1",
+                    "url": "https://static.tildacdn.com/stor3437-3832-4865-b830-306263646566/48671803.png"
+                },
+                {
+                    "name": "BVLGARI",
+                    "url": "https://static.tildacdn.com/stor3463-3339-4438-b038-326333356262/21745484.png"
+                },
+                {
+                    "name": "07",
+                    "url": "https://static.tildacdn.com/stor3661-3866-4666-b038-326166313535/95136733.png"
+                },
+                {
+                    "name": "В",
+                    "url": "https://static.tildacdn.com/stor3964-3630-4738-a337-653235303362/35591553.png"
+                },
+                {
+                    "name": "Белый мрамор",
+                    "url": "https://static.tildacdn.com/stor3130-6434-4062-b434-333832613539/71831414.png"
+                },
+                {
+                    "name": "Призрачный камень",
+                    "url": "https://static.tildacdn.com/stor3638-3865-4334-a233-363737386161/54561198.png"
+                },
+                {
+                    "name": "Loren Gold",
+                    "url": "https://static.tildacdn.com/stor3233-6364-4534-b865-343239616531/51579659.png"
+                }
+            ],
+            "Cерия блеск кристала": [
+                {
+                    "name": "Белый ледник",
+                    "url": "https://static.tildacdn.com/stor3431-3561-4639-a131-306433363237/54595933.png"
+                },
+                {
+                    "name": "Диатомовый бежевый",
+                    "url": "https://static.tildacdn.com/stor3234-3031-4265-b461-393239653639/99667841.png"
+                },
+                {
+                    "name": "Кофе с молоком",
+                    "url": "https://static.tildacdn.com/stor6237-3734-4430-b831-353034633331/37793786.png"
+                },
+                {
+                    "name": "Диатомовый серый",
+                    "url": "https://static.tildacdn.com/stor3738-6433-4231-b337-626433346335/12546232.png"
+                },
+                {
+                    "name": "Ледниково-белая ткань",
+                    "url": "https://static.tildacdn.com/stor6266-6530-4531-b838-663834393738/77225880.png"
+                },
+                {
+                    "name": "Ткань кофе с молоком",
+                    "url": "https://static.tildacdn.com/stor6236-6332-4964-b438-363365343335/79468631.png"
+                },
+                {
+                    "name": "Бежево-серая ткань",
+                    "url": "https://static.tildacdn.com/stor6634-3864-4132-b264-303734306465/29913639.png"
+                },
+                {
+                    "name": "Светло синяя ткань",
+                    "url": "https://static.tildacdn.com/stor3931-6539-4731-a564-353038393232/20754902.png"
+                },
+                {
+                    "name": "Призрачно серая ткань",
+                    "url": "https://static.tildacdn.com/stor6137-3964-4535-a238-363630613630/99919787.png"
+                },
+                {
+                    "name": "Эффект Мия №1",
+                    "url": "https://static.tildacdn.com/stor3966-6530-4566-b762-633230333466/95554688.png"
+                },
+                {
+                    "name": "Эффект Мия №2",
+                    "url": "https://static.tildacdn.com/stor3266-6264-4566-b563-323434326238/17985523.png"
+                },
+                {
+                    "name": "Роскошный лён №1",
+                    "url": "https://static.tildacdn.com/stor3331-3833-4965-a338-303662396665/82645621.png"
+                },
+                {
+                    "name": "Роскошный лён №2",
+                    "url": "https://static.tildacdn.com/stor6637-3235-4035-a539-646232653036/66398349.png"
+                },
+                {
+                    "name": "Роскошный лён №3",
+                    "url": "https://static.tildacdn.com/stor3936-3038-4634-a262-376230636330/19367036.png"
+                }
+            ],
+            "Cерия кожа": [
+                {
+                    "name": "8f046",
+                    "url": "https://static.tildacdn.com/stor3638-6365-4264-b731-333039303363/23762658.png"
+                },
+                {
+                    "name": "8f006",
+                    "url": "https://static.tildacdn.com/stor3765-3635-4536-b038-346165363064/18726157.png"
+                },
+                {
+                    "name": "8f008",
+                    "url": "https://static.tildacdn.com/stor6265-3637-4266-b430-336636333732/16514021.png"
+                },
+                {
+                    "name": "8f005",
+                    "url": "https://static.tildacdn.com/stor6465-3761-4434-a566-303332373234/24708941.png"
+                },
+                {
+                    "name": "8f004",
+                    "url": "https://static.tildacdn.com/stor6435-3634-4662-a661-663164633439/40265599.png"
+                },
+                {
+                    "name": "8f003",
+                    "url": "https://static.tildacdn.com/stor6562-3832-4865-a466-353637396334/84585097.png"
+                },
+                {
+                    "name": "8f038",
+                    "url": "https://static.tildacdn.com/stor3833-6633-4930-a532-373232316539/86119530.png"
+                },
+                {
+                    "name": "9025",
+                    "url": "https://static.tildacdn.com/stor6532-3363-4763-b966-326661383338/78926574.png"
+                },
+                {
+                    "name": "8f049",
+                    "url": "https://static.tildacdn.com/stor6431-3439-4634-b137-323766633461/93318853.png"
+                },
+                {
+                    "name": "9005",
+                    "url": "https://static.tildacdn.com/stor3164-6431-4238-a131-303338373437/73785662.png"
+                },
+                {
+                    "name": "9019",
+                    "url": "https://static.tildacdn.com/stor6662-6337-4261-a430-343963343364/84584865.png"
+                },
+                {
+                    "name": "8069",
+                    "url": "https://static.tildacdn.com/stor6131-3432-4162-b733-333662306663/19842794.png"
+                },
+                {
+                    "name": "8127",
+                    "url": "https://static.tildacdn.com/stor3533-3766-4566-b337-633933653030/29907609.png"
+                },
+                {
+                    "name": "9002",
+                    "url": "https://static.tildacdn.com/stor3534-6630-4364-a634-306563333230/48563389.png"
+                }
+            ]
+        }
+    }
+}
