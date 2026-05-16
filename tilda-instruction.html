@@ -1,0 +1,382 @@
+<!-- Инструкция по работе с 3D Визуализатором DOUBLE RINGS -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .dr-instruction {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+        font-family: 'Inter', 'TildaSans', Arial, sans-serif;
+        background: #0f0f0f;
+        color: #ffffff;
+    }
+    
+    .dr-instruction__header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    
+    .dr-instruction__label {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #c4a35a;
+        margin-bottom: 16px;
+        border: 1px solid rgba(196, 163, 90, 0.3);
+        padding: 8px 20px;
+        border-radius: 30px;
+    }
+    
+    .dr-instruction__title {
+        font-size: 42px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 16px;
+        color: #ffffff;
+    }
+    
+    .dr-instruction__subtitle {
+        font-size: 18px;
+        color: #888;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    .dr-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 60px;
+    }
+    
+    .dr-step {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 32px 24px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .dr-step:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(196, 163, 90, 0.2);
+        transform: translateY(-4px);
+    }
+    
+    .dr-step__number {
+        width: 48px;
+        height: 48px;
+        background: rgba(196, 163, 90, 0.1);
+        border: 2px solid #c4a35a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #c4a35a;
+    }
+    
+    .dr-step__icon {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 16px;
+        display: block;
+        fill: #c4a35a;
+    }
+    
+    .dr-step__icon svg {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .dr-step__title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+    
+    .dr-step__desc {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.5;
+    }
+    
+    .dr-step__arrow {
+        display: none;
+    }
+    
+    .dr-features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+    
+    .dr-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    
+    .dr-feature__icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(196, 163, 90, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .dr-feature__icon svg {
+        width: 22px;
+        height: 22px;
+        fill: #c4a35a;
+    }
+    
+    .dr-feature__content h4 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #fff;
+    }
+    
+    .dr-feature__content p {
+        font-size: 13px;
+        color: #777;
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    .dr-cta {
+        text-align: center;
+        padding: 50px 40px;
+        background: rgba(196, 163, 90, 0.05);
+        border: 1px solid rgba(196, 163, 90, 0.15);
+        border-radius: 20px;
+    }
+    
+    .dr-cta__title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #fff;
+    }
+    
+    .dr-cta__text {
+        font-size: 15px;
+        color: #888;
+        margin-bottom: 30px;
+    }
+    
+    .dr-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #c4a35a;
+        color: #0f0f0f !important;
+        padding: 18px 48px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 30px rgba(196, 163, 90, 0.25);
+        border: none;
+        cursor: pointer;
+    }
+    
+    .dr-button:hover {
+        background: #d4b36a;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(196, 163, 90, 0.35);
+    }
+    
+    .dr-button svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+    
+    .dr-note {
+        margin-top: 24px;
+        font-size: 13px;
+        color: #666;
+    }
+    
+    .dr-note span {
+        color: #c4a35a;
+        font-weight: 500;
+    }
+    
+    @media (max-width: 1024px) {
+        .dr-steps {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .dr-features {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .dr-instruction {
+            padding: 50px 16px;
+        }
+        .dr-instruction__title {
+            font-size: 32px;
+        }
+        .dr-steps {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .dr-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+            padding: 24px;
+        }
+        .dr-step__number {
+            margin: 0;
+            flex-shrink: 0;
+        }
+        .dr-step__icon {
+            display: none;
+        }
+        .dr-step__content {
+            flex: 1;
+        }
+        .dr-features {
+            grid-template-columns: 1fr;
+        }
+        .dr-cta {
+            padding: 40px 24px;
+        }
+        .dr-button {
+            padding: 16px 36px;
+            font-size: 14px;
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<div class="dr-instruction">
+    <!-- Заголовок -->
+    <div class="dr-instruction__header">
+        <div class="dr-instruction__label">Как пользоваться</div>
+        <h2 class="dr-instruction__title">3D Визуализатор интерьера</h2>
+        <p class="dr-instruction__subtitle">
+            Подберите идеальное сочетание отделочных материалов для вашего пространства за 4 простых шага
+        </p>
+    </div>
+    
+    <!-- Шаги -->
+    <div class="dr-steps">
+        <div class="dr-step">
+            <div class="dr-step__number">1</div>
+            <div class="dr-step__icon">
+                <svg viewBox="0 0 24 24"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"/></svg>
+            </div>
+            <div class="dr-step__content">
+                <div class="dr-step__title">Выберите панель</div>
+                <div class="dr-step__desc">Нажмите на левую, центральную или правую панель, которую хотите изменить</div>
+            </div>
+        </div>
+        
+        <div class="dr-step">
+            <div class="dr-step__number">2</div>
+            <div class="dr-step__icon">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            <div class="dr-step__content">
+                <div class="dr-step__title">Нажмите галочку</div>
+                <div class="dr-step__desc">Кликните золотую кнопку с галочкой в правом нижнем углу, чтобы открыть каталог</div>
+            </div>
+        </div>
+        
+        <div class="dr-step">
+            <div class="dr-step__number">3</div>
+            <div class="dr-step__icon">
+                <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            </div>
+            <div class="dr-step__content">
+                <div class="dr-step__title">Выберите материал</div>
+                <div class="dr-step__desc">Перейдите в категорию и нажмите на понравившуюся текстуру — она сразу применится</div>
+            </div>
+        </div>
+        
+        <div class="dr-step">
+            <div class="dr-step__number">4</div>
+            <div class="dr-step__icon">
+                <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+            </div>
+            <div class="dr-step__content">
+                <div class="dr-step__title">Сохраните результат</div>
+                <div class="dr-step__desc">Ваш выбор автоматически сохраняется. Вернитесь к нему в любое время</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Возможности -->
+    <div class="dr-features">
+        <div class="dr-feature">
+            <div class="dr-feature__icon">
+                <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            </div>
+            <div class="dr-feature__content">
+                <h4>Сброс текстур</h4>
+                <p>Нажмите круглую стрелку слева внизу, чтобы вернуть стандартные материалы</p>
+            </div>
+        </div>
+        
+        <div class="dr-feature">
+            <div class="dr-feature__icon">
+                <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            </div>
+            <div class="dr-feature__content">
+                <h4>Работает на телефоне</h4>
+                <p>Визуализатор адаптирован для смартфонов — меняйте панели в один клик</p>
+            </div>
+        </div>
+        
+        <div class="dr-feature">
+            <div class="dr-feature__icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            </div>
+            <div class="dr-feature__content">
+                <h4>83 текстуры в каталоге</h4>
+                <p>6 коллекций: ткань, дерево, металл, мрамор, блеск кристалла и кожа</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Кнопка CTA -->
+    <div class="dr-cta">
+        <div class="dr-cta__title">Готовы подобрать материалы?</div>
+        <div class="dr-cta__text">Визуализатор откроется в новой вкладке с полным экраном</div>
+        <a href="https://ar.doublerings.ru/" target="_blank" class="dr-button">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Запустить визуализатор
+        </a>
+        <div class="dr-note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#c4a35a" style="vertical-align: middle; margin-right: 4px;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+            <span>Совет:</span> используйте Chrome, Safari или Яндекс.Браузер для лучшей производительности
+        </div>
+    </div>
+</div>
